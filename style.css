@@ -447,7 +447,7 @@ body.page-scene {
     position: relative;
     background: linear-gradient(180deg, #ffffff 0%, #ffffff 38%, #d6ecdf 100%);
     border-radius: 6px;
-    padding: 20px;
+    padding: 13px 20px;
     overflow: visible;
     width: 343px;
     height: 366px;
@@ -499,6 +499,7 @@ body.page-scene {
     margin-bottom: 5px;
     font-size: 8px;
     color: #3a4a44;
+    min-height: 23px;
 }
 .screen-v2-ignyte-1 .opt.selected { border: 1.5px solid var(--green); color: var(--green-dark); font-weight: 700; }
 .screen-v2-ignyte-1 .opt.skeleton { display: flex; align-items: center; gap: 8px; }
@@ -528,16 +529,20 @@ body.page-scene {
     padding: 14px;
     box-shadow: 0 18px 40px -20px rgba(0,0,0,.18);
 }
-.screen-v2-ignyte-1 .jd-head     { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.screen-v2-ignyte-1 .jd-head     { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
 .screen-v2-ignyte-1 .jd-logo-dot {
   width: 28px; height: 28px; border-radius: 50%; background: var(--green);
   display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 14px;
 }
 .screen-v2-ignyte-1 .jd-brand    { font-weight: 800; letter-spacing: 1px; color: var(--text); }
 .screen-v2-ignyte-1 .jd-title {
-  font-size: 12px; font-weight: 700;
-  background: linear-gradient(90deg, #3fb98e, #1c6e57);
-  -webkit-background-clip: text; background-clip: text; color: transparent; margin: 6px 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #3fb98e, #1c6e57);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 2px 0 3px;
 }
 .screen-v2-ignyte-1 .divider     { height: 1px; background: #cfe0d6; margin: 5px 0; }
 .screen-v2-ignyte-1 .jd-section  { margin-bottom: 5px; }
@@ -554,10 +559,10 @@ body.page-scene {
     font-size: 8px;
 }
 .screen-v2-ignyte-1 .ask {
-    margin-top: 10px;
+    margin-top: 13px;
     background: rgba(255,255,255,.7);
     border-radius: 6px;
-    padding: 2px 8px;
+    padding: 2px 5px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -565,6 +570,7 @@ body.page-scene {
     z-index: 999999;
     width: 100%;
     position: relative;
+    /* max-height: 44px; */
 }
 .screen-v2-ignyte-1 .attach {
     width: 17px;
@@ -608,6 +614,7 @@ body.page-scene {
     right: 0;
     margin-right: -3px;
 }
+
 .screen-v2-ignyte-1 .chip svg    { width: 8px; height: 8px; }
 @media (max-width: 820px) {
   .screen-v2-ignyte-1 .question-card { width: 100%; }
