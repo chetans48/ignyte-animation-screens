@@ -2,69 +2,165 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ignyte — Recruiter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Researcher</title>
 <link rel="stylesheet" href="style.css" />
 </head>
-<body class="page-dark">
-  <div class="stage screen-v2-ignyte-3">
-    <div class="center-wrap">
+<body>
 
-      <!-- Candidate -->
-      <div class="card candidate">
-        <div class="photo"></div>
-        <div class="name">Rachael T</div>
-        <div class="role">CFO, Luxe Group</div>
-        <div class="name-skel"></div>
+<div class="scene screen-researcher">
+  <div class="canvas">
+
+    <!-- ── Researcher label ── -->
+    <span class="tag green tag-researcher">The Researcher</span>
+
+    <!-- ══════════════════════════════════════
+         LEFT PANEL
+    ══════════════════════════════════════ -->
+    <section class="glass researcher">
+      <h2>Here is the candidate shortlist based<br>on your spec</h2>
+
+      <div class="input-box">
+        <div class="sk"></div>
+        <div class="sk"></div>
       </div>
 
-      <!-- Candidate shortlist (left, overlapping) -->
-      <div class="card shortlist">
-        <h4>Candidate shortlist</h4>
-        <div class="sl-row">
-          <div class="skel"></div>
-          <span class="score">93</span>
+      <div class="section-title">Mapped Competences</div>
+
+      <!-- row 1 -->
+      <div class="row">
+        <div class="avatar a1"></div>
+        <div class="cell">
+          <div class="check">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div><div class="sk"></div></div>
         </div>
-        <div class="sl-row alt">
-          <div class="skel"></div>
-          <span class="score">62</span>
-        </div>
-        <div class="sl-row alt">
-          <div class="skel"></div>
-          <span class="score">40</span>
+        <div class="cell">
+          <div class="flag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div></div>
+          <span class="badge">Perfect Fit</span>
         </div>
       </div>
 
-      <!-- 16 Candidates Shortlisted (right) -->
-      <div class="card shortlisted">
-        <div class="num">16</div>
-        <div class="lbl">Candidates<br/>Shortlisted</div>
-      </div>
-    </div>
-
-    <!-- Recruiter -->
-    <div class="card recruiter-card">
-      <span class="tag">RECRUITER</span>
-      <div class="divider"></div>
-      <div class="rec-title">Here are personalized messages<br/>for all 16 candidates</div>
-      <div class="input-grid">
-        <div class="ghost"></div>
-        <div class="ghost"></div>
-        <div class="ghost full"></div>
-      </div>
-
-      <!-- Message card -->
-      <div class="card message">
-        <h3>Message</h3>
-        <div class="to">To: Rachael T</div>
-        <div class="subject">
-          <div class="s-title">Subject: A conversation about your next chapter</div>
-          <div class="s-body">Rachael — Your work leading corporate strategy at Luxe Group, particularly the integration playbook across four acquisitions…</div>
+      <!-- row 2 -->
+      <div class="row">
+        <div class="avatar a2"></div>
+        <div class="cell">
+          <div class="check">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div><div class="sk"></div></div>
         </div>
-        <div class="msg-skel" style="width:90%"></div>
-        <div class="msg-skel" style="width:75%"></div>
+        <div class="cell">
+          <div class="flag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div></div>
+          <span class="badge">Perfect Fit</span>
+        </div>
       </div>
-    </div>
-  </div>
+
+      <!-- row 3 -->
+      <div class="row">
+        <div class="avatar a3"></div>
+        <div class="cell">
+          <div class="check">
+            <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 7 5.5 10.5 12 3.5"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div><div class="sk"></div></div>
+        </div>
+        <div class="cell">
+          <div class="flag">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>
+          </div>
+          <div class="sk-stack"><div class="sk"></div></div>
+          <span class="badge pink">Perfect Fit</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         FILTERABLE FIT SCORES
+    ══════════════════════════════════════ -->
+    <section class="glass scores">
+      <h3>Filterable fit scores</h3>
+
+      <div class="score-row">
+        <div class="s-avatar a4"></div>
+        <div class="score-mid">
+          <div class="pills">
+            <span class="pill high">High</span>
+            <span class="pill mid">Mid</span>
+            <span class="pill review">Review</span>
+          </div>
+          <div class="bar"><div class="bar-fill" data-w="91" style="--w:91%">91%</div></div>
+        </div>
+        <div class="fi">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z"/></svg>
+        </div>
+      </div>
+
+      <div class="score-row">
+        <div class="s-avatar a5"></div>
+        <div class="score-mid">
+          <div class="pills">
+            <span class="pill high">High</span>
+            <span class="pill mid">Mid</span>
+            <span class="pill review">Review</span>
+          </div>
+          <div class="bar"><div class="bar-fill" data-w="51" style="--w:51%">51%</div></div>
+        </div>
+        <div class="fi">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z"/></svg>
+        </div>
+      </div>
+
+      <div class="score-row">
+        <div class="s-avatar a6"></div>
+        <div class="score-mid">
+          <div class="pills">
+            <span class="pill high">High</span>
+            <span class="pill mid">Mid</span>
+            <span class="pill review">Review</span>
+          </div>
+          <div class="bar"><div class="bar-fill" data-w="21" style="--w:21%">21%</div></div>
+        </div>
+        <div class="fi">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SEARCH OPERATOR
+    ══════════════════════════════════════ -->
+    <section class="glass operator">
+      <span class="tag pink op-tag">Search Operator</span>
+      <div class="op-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20v-1a6 6 0 0 1 6-6h2"/>
+          <circle cx="19" cy="19" r="3"/>
+          <path d="M19 16v1M19 22v-1M22 19h-1M16 19h1"/>
+        </svg>
+      </div>
+      <p>Ensuring all candidates<br>meet your talent strategy</p>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         REASONING DETAILS
+    ══════════════════════════════════════ -->
+    <section class="glass reasoning">
+      <h3>Reasoning Details</h3>
+      <div class="bullet"><span class="dot"></span><div class="sk"></div></div>
+      <div class="bullet"><span class="dot"></span><div class="sk"></div></div>
+    </section>
+
+  </div><!-- /canvas -->
+</div><!-- /scene -->
+
 </body>
 </html>
