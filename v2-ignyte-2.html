@@ -5,16 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Ignyte — Search Consultant / Operator</title>
 <link rel="stylesheet" href="style.css" />
+<style>
+  .ignyte2-scaler {
+    width: 100%;
+    max-width: 458px;
+    aspect-ratio: 458 / 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .ignyte2-scaler > .stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+</style>
 </head>
 <body class="page-dark">
-  <div class="stage screen-v2-ignyte-2">
-    <div class="canvas">
-    <span class="tag lime">SEARCH CONSULTANT</span>
+  <div class="ignyte2-scaler">
+    <div class="stage screen-ignyte-2">
+      <div class="canvas">
 
-    <div class="grid">
-      <!-- LEFT COLUMN -->
-      <div class="left">
-        <div class="card">
+      <span class="tag lime">SEARCH CONSULTANT</span>
+
+      <div class="grid">
+
+        <!-- ── Main card: Target Companies + Recommendations ── -->
+        <div class="card card-main">
           <div class="heading">Defining company targets per the role and spec</div>
 
           <div class="inner">
@@ -35,11 +52,12 @@
           </div>
         </div>
 
+        <!-- ── Spec card: Draft Spec Structure — overlaps card-main bottom ── -->
         <div class="card spec-card">
           <h3>Draft Spec Structure</h3>
 
           <div class="row">
-            <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=47');"></div>
+            <div class="avatar" style="background-image:url('images/img01.png');"></div>
             <div class="body">
               <div class="name">Company Vision</div>
               <div class="skel" style="width:60%;"></div>
@@ -48,7 +66,7 @@
           </div>
 
           <div class="row">
-            <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=12');"></div>
+            <div class="avatar" style="background-image:url('images/img02.png');"></div>
             <div class="body">
               <div class="name">Target Experience</div>
               <div class="skel" style="width:55%;"></div>
@@ -57,7 +75,7 @@
           </div>
 
           <div class="row">
-            <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=15');"></div>
+            <div class="avatar" style="background-image:url('images/img03.png');"></div>
             <div class="body">
               <div class="name">Interview Questions</div>
               <div class="skel" style="width:65%;"></div>
@@ -65,15 +83,14 @@
             <span class="badge review">Review</span>
           </div>
         </div>
-      </div>
 
-      <!-- RIGHT COLUMN -->
-      <div class="right">
+        <!-- ── Stat card: 15+ Industries ── -->
         <div class="card stat-card">
           <div class="stat-num">15+</div>
           <div class="stat-label">Target<br/>Industries</div>
         </div>
 
+        <!-- ── Review card: Reviewing search ── -->
         <div class="card review-card">
           <div class="icon">
             <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="#1f6f57" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -90,10 +107,10 @@
           </div>
         </div>
 
-        <div style="margin-top:8px;">
-          <span class="tag pink">SEARCH OPERATOR</span>
-        </div>
+        <!-- ── SEARCH OPERATOR label ── -->
+        <span class="tag pink op-tag">SEARCH OPERATOR</span>
 
+        <!-- ── Operator card ── -->
         <div class="card operator-card">
           <div class="op-head">
             <div class="op-icon">
@@ -118,9 +135,23 @@
             <div class="skel" style="flex:1;width:auto;"></div>
           </div>
         </div>
-      </div>
-    </div>
-    </div><!-- .canvas -->
-  </div>
+
+      </div><!-- .grid -->
+
+      </div><!-- .canvas -->
+    </div><!-- .stage -->
+  </div><!-- .ignyte2-scaler -->
+
+  <script>
+    (function () {
+      var scaler = document.querySelector('.ignyte2-scaler');
+      var stage  = scaler.querySelector('.stage');
+      function resize() {
+        stage.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>

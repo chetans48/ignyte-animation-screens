@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Ignyte — Search Consultant</title>
 <link rel="stylesheet" href="style.css" />
+<style>
+  .ignyte1-scaler {
+    width: 100%;
+    max-width: 458px;
+    aspect-ratio: 458 / 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .ignyte1-scaler > .stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+</style>
 </head>
 <body class="page-dark">
+  <div class="ignyte1-scaler">
   <div class="stage screen-v2-ignyte-1">
     <div class="panel">
       <div class="topbar">
@@ -112,5 +128,18 @@ Outreach email</button>
       </div>
     </div>
   </div>
+  </div><!-- .ignyte1-scaler -->
+
+  <script>
+    (function () {
+      var scaler = document.querySelector('.ignyte1-scaler');
+      var stage  = scaler.querySelector('.stage');
+      function resize() {
+        stage.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>

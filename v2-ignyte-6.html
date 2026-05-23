@@ -6,9 +6,23 @@
 <title>IGNYTE — Assistant Report</title>
 <link rel="stylesheet" href="style.css" />
 <style>
+  .ignyte6-scaler {
+    width: 100%;
+    max-width: 458px;
+    aspect-ratio: 458 / 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .ignyte6-scaler > .scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
 </style>
 </head>
 <body class="page-dark">
+  <div class="ignyte6-scaler">
   <div class="scene screen-v2-ignyte-6">
     <div class="canvas">
 
@@ -266,5 +280,18 @@
       </div><!-- .main-grid -->
     </div><!-- .canvas -->
   </div>
+  </div><!-- .ignyte6-scaler -->
+
+  <script>
+    (function () {
+      var scaler = document.querySelector('.ignyte6-scaler');
+      var scene  = scaler.querySelector('.scene');
+      function resize() {
+        scene.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>

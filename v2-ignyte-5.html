@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>IGNYTE — Candidate Profiles</title>
 <link rel="stylesheet" href="style.css" />
+<style>
+  .ignyte5-scaler {
+    width: 100%;
+    max-width: 458px;
+    aspect-ratio: 458 / 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .ignyte5-scaler > .scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+</style>
 </head>
 <body class="page-dark">
+  <div class="ignyte5-scaler">
   <div class="scene screen-v2-ignyte">
     <div class="canvas">
 
@@ -120,5 +136,18 @@
 
     </div><!-- .canvas -->
   </div>
+  </div><!-- .ignyte5-scaler -->
+
+  <script>
+    (function () {
+      var scaler = document.querySelector('.ignyte5-scaler');
+      var scene  = scaler.querySelector('.scene');
+      function resize() {
+        scene.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>

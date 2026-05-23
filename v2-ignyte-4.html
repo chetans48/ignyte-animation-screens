@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Ignyte — Recruiter</title>
 <link rel="stylesheet" href="style.css" />
+<style>
+  .ignyte4-scaler {
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 460 / 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .ignyte4-scaler > .stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+  }
+</style>
 </head>
 <body class="page-dark">
+  <div class="ignyte4-scaler">
   <div class="stage screen-ignyte-3">
     <div class="canvas">
     <div class="center-wrap">
@@ -68,5 +84,18 @@
     </div>
     </div><!-- .canvas -->
   </div>
+  </div><!-- .ignyte4-scaler -->
+
+  <script>
+    (function () {
+      var scaler = document.querySelector('.ignyte4-scaler');
+      var stage  = scaler.querySelector('.stage');
+      function resize() {
+        stage.style.transform = 'scale(' + (scaler.offsetWidth / 460) + ')';
+      }
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>
