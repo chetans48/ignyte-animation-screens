@@ -1,147 +1,230 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>IGNYTE — Candidate Profiles</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .ignyte5-scaler {
-    width: 100%;
-    max-width: 458px;
-    aspect-ratio: 458 / 400;
-    position: relative;
-    overflow: hidden;
-  }
-  .ignyte5-scaler > .scene {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: top left;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IGNYTE — Candidate Profiles</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .ignyte5-scaler {
+      width: 100%;
+      max-width: 458px;
+      aspect-ratio: 458 / 400;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ignyte5-scaler>.scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    /* Override the fillBar animation to loop continuously and run more slowly */
+    .screen-v2-ignyte .fill {
+      animation: fillBar 4.5s ease-out infinite !important;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    /* Loop-based shimmer for all skeletons in screen 5 */
+    .screen-v2-ignyte .sk {
+      background: linear-gradient(90deg, #e3ece5 25%, #f1f5f2 50%, #e3ece5 75%) !important;
+      background-size: 200% 100% !important;
+      animation: shimmer 3s infinite linear !important;
+    }
+  </style>
 </head>
+
 <body class="page-dark">
   <div class="ignyte5-scaler">
-  <div class="scene screen-v2-ignyte">
-    <div class="canvas">
+    <div class="scene screen-v2-ignyte">
+      <div class="canvas">
 
-    <!-- main candidate card -->
-    <div class="card main">
-      <div class="brand">
-        <div class="logo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0e1b16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 19 L12 5 L19 19"/><path d="M8.5 13 H15.5"/>
-          </svg>
-        </div>
-        <h1>IGNYTE</h1>
-      </div>
-
-      <div class="panel">
-        <h2>Candidate profiles</h2>
-
-        <div class="row">
-          <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&q=80')"></div>
-          <div class="lines"><div class="sk w90"></div><div class="sk w70"></div></div>
-          <div class="rate">
-            <div class="stars">
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
+        <!-- main candidate card -->
+        <div class="card main">
+          <div class="brand">
+            <div class="logo">
             </div>
-            <small>4.8 Ratings</small>
+            <h1>IGNYTE Intelligence</h1>
+          </div>
+
+          <div class="panel">
+            <h2>Candidate profiles</h2>
+
+            <div class="row">
+              <div class="avatar"
+                style="background-image:url('https://images.unsplash.com/photo-1552058544-f2b08422138a?w=200&q=80')">
+              </div>
+              <div class="lines">
+                <div class="sk w90"></div>
+                <div class="sk w70"></div>
+              </div>
+              <div class="rate">
+                <div class="stars">
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                </div>
+                <small>4.8 Ratings</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="avatar"
+                style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80')">
+              </div>
+              <div class="lines">
+                <div class="sk w80"></div>
+                <div class="sk w70"></div>
+              </div>
+              <div class="rate">
+                <div class="stars">
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                </div>
+                <small>3.0 Ratings</small>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="avatar"
+                style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80')">
+              </div>
+              <div class="lines">
+                <div class="sk w90"></div>
+                <div class="sk w70"></div>
+              </div>
+              <div class="rate">
+                <div class="stars">
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="#7fc66a">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                  <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5">
+                    <polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9" />
+                  </svg>
+                </div>
+                <small>3.2 Ratings</small>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80')"></div>
-          <div class="lines"><div class="sk w80"></div><div class="sk w70"></div></div>
-          <div class="rate">
-            <div class="stars">
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
+        <!-- notes panel -->
+        <div class="card notes">
+          <h3>Notes and feedback captured</h3>
+          <div class="note">
+            <div class="dot"></div>
+            <div class="nlines">
+              <div class="sk w90"></div>
+              <div class="sk w70"></div>
             </div>
-            <small>3.0 Ratings</small>
+            <div class="copy">Copy</div>
+          </div>
+          <div class="note">
+            <div class="dot"></div>
+            <div class="nlines">
+              <div class="sk w90"></div>
+              <div class="sk w80"></div>
+            </div>
+            <div class="copy">Copy</div>
+          </div>
+          <div class="note">
+            <div class="dot"></div>
+            <div class="nlines">
+              <div class="sk w90"></div>
+              <div class="sk w70"></div>
+            </div>
+            <div class="copy">Copy</div>
+          </div>
+          <div class="note">
+            <div class="dot"></div>
+            <div class="nlines">
+              <div class="sk w80"></div>
+              <div class="sk w70"></div>
+            </div>
+            <div class="copy">Copy</div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="avatar" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80')"></div>
-          <div class="lines"><div class="sk w90"></div><div class="sk w70"></div></div>
-          <div class="rate">
-            <div class="stars">
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="#7fc66a"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
-              <svg class="star" viewBox="0 0 24 24" fill="none" stroke="#7fc66a" stroke-width="1.5"><polygon points="12,2 15,9 22,9 16.5,14 18.5,22 12,17.5 5.5,22 7.5,14 2,9 9,9"/></svg>
+        <!-- process panel -->
+        <div class="card process">
+          <div class="topRow">
+            <h3 style="margin:0">Process tracked</h3>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+              <div class="sk" style="width:90px;height:8px"></div>
+              <div class="sk" style="width:60px;height:8px"></div>
             </div>
-            <small>3.2 Ratings</small>
+          </div>
+          <div class="track">
+            <div class="fill"></div>
+          </div>
+          <div class="nodes">
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node"></div>
+            <div class="node last">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0e1b16" stroke-width="2.6" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="13 6 19 12 13 18" />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- notes panel -->
-    <div class="card notes">
-      <h3>Notes and feedback captured</h3>
-      <div class="note">
-        <div class="dot"></div>
-        <div class="nlines"><div class="sk w90"></div><div class="sk w70"></div></div>
-        <div class="copy">Copy</div>
-      </div>
-      <div class="note">
-        <div class="dot"></div>
-        <div class="nlines"><div class="sk w90"></div><div class="sk w80"></div></div>
-        <div class="copy">Copy</div>
-      </div>
-      <div class="note">
-        <div class="dot"></div>
-        <div class="nlines"><div class="sk w90"></div><div class="sk w70"></div></div>
-        <div class="copy">Copy</div>
-      </div>
-      <div class="note">
-        <div class="dot"></div>
-        <div class="nlines"><div class="sk w80"></div><div class="sk w70"></div></div>
-        <div class="copy">Copy</div>
-      </div>
+      </div><!-- .canvas -->
     </div>
-
-    <!-- process panel -->
-    <div class="card process">
-      <div class="topRow">
-        <h3 style="margin:0">Process tracked</h3>
-        <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-          <div class="sk" style="width:90px;height:8px"></div>
-          <div class="sk" style="width:60px;height:8px"></div>
-        </div>
-      </div>
-      <div class="track"><div class="fill"></div></div>
-      <div class="nodes">
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node last">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#0e1b16" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    </div><!-- .canvas -->
-  </div>
   </div><!-- .ignyte5-scaler -->
 
   <script>
     (function () {
       var scaler = document.querySelector('.ignyte5-scaler');
-      var scene  = scaler.querySelector('.scene');
+      var scene = scaler.querySelector('.scene');
       function resize() {
         scene.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
       }
@@ -150,4 +233,5 @@
     })();
   </script>
 </body>
+
 </html>

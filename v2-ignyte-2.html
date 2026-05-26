@@ -1,166 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ignyte — Search Consultant / Operator</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .ignyte2-scaler {
-    width: 100%;
-    max-width: 458px;
-    aspect-ratio: 458 / 400;
-    position: relative;
-    overflow: hidden;
-  }
-  .ignyte2-scaler > .stage {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: top left;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ignyte — Search Consultant / Operator</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Scaler and canvas container */
+    .ignyte2-scaler {
+      width: 100%;
+      max-width: 458px;
+      aspect-ratio: 458 / 400;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ignyte2-scaler>.stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    /* Scoped Styles for Screen 2 under .screen-ignyte-2 to avoid breaking other screens */
+    .screen-ignyte-2 {
+      font-family: var(--font-main), 'Inter', 'Open Sans', sans-serif !important;
+      background-image: url('images/bg-card.png') !important;
+      background-size: cover !important;
+      position: relative !important;
+      width: 458px !important;
+      height: 400px !important;
+      padding: 0 !important;
+      /* Absolute positioning relative to canvas border */
+      border-radius: 14px;
+      overflow: hidden;
+      color: var(--text);
+    }
+
+    /* Completely transparent coordinate-wise grid wrapper */
+    .screen-ignyte-2 .grid {
+      position: absolute !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Card base overwrite */
+    .screen-ignyte-2 .card {
+      position: absolute !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+      border-radius: 7px !important;
+    }
+
+    /* Lime Badge Top-Left */
+    .screen-ignyte-2 .main-tag {
+      position: absolute !important;
+      left: 36px !important;
+      top: 40px !important;
+      z-index: 10 !important;
+      font-size: 6px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.5px !important;
+      padding: 4px 5px !important;
+      border-radius: 2px !important;
+      background: var(--green-lime) !important;
+      color: #1a1a1a !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+      text-transform: uppercase !important;
+      width: auto !important;
+      white-space: nowrap !important;
+    }
+
+    .screen-ignyte-2 .main-tag::before {
+      content: "• " !important;
+    }
+
+    /* ── Main card: Target Companies + Recommendations ── */
+    .screen-ignyte-2 .card-main {
+      left: 36px !important;
+      top: 60px !important;
+      width: 244px !important;
+      height: 200px !important;
+      background: rgba(219, 237, 229, 0.9) !important;
+      /* Light glassy greenish-grey */
+      border: 1px solid #bfd3c7 !important;
+      padding: 9px 10px !important;
+      z-index: 1 !important;
+    }
+
+    .screen-ignyte-2 .card-main .heading {
+      color: #3a4a44 !important;
+      font-size: 6.8px !important;
+      font-weight: 600 !important;
+      line-height: 1.35 !important;
+      margin-bottom: 6px !important;
+    }
+
+    /* Inner containers inside Main Card are SOLID WHITE */
+    .screen-ignyte-2 .card-main .inner {
+      background: #ffffff !important;
+      border: 1px solid #dcece3 !important;
+      border-radius: 5px !important;
+      padding: 6px 8px !important;
+      margin-bottom: 5px !important;
+    }
+
+    .screen-ignyte-2 .card-main .inner.pink {
+      border: 1px solid #f2cbd4 !important;
+      background: #ffffff !important;
+    }
+
+    .screen-ignyte-2 .card-main .inner h4 {
+      color: #009f7a !important;
+      font-size: 7px !important;
+      font-weight: 700 !important;
+      margin-bottom: 4px !important;
+      font-family: var(--font-main), 'Inter', sans-serif !important;
+    }
+
+    .screen-ignyte-2 .card-main .inner.pink h4 {
+      color: #3a4a44 !important;
+      font-weight: 600 !important;
+      font-size: 6.5px !important;
+    }
+
+    /* Skeleton Shimmering Base Styles */
+    .screen-ignyte-2 .skel {
+      height: 4px !important;
+      border-radius: 2px !important;
+      background: linear-gradient(90deg, #bec9c5 25%, #eef5f2 50%, #d2dfda 75%) !important;
+      background-size: 200% 100% !important;
+      animation: shimmer 1.5s infinite linear !important;
+    }
+
+    .screen-ignyte-2 .pill {
+      height: 6px !important;
+      border-radius: 3px !important;
+      background: linear-gradient(90deg, #bcc9c4 25%, #eef5f2 50%, #d2dfda 75%) !important;
+      background-size: 200% 100% !important;
+      animation: shimmer 1.5s infinite linear !important;
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+
+    .screen-ignyte-2 .pill-row {
+      display: flex !important;
+      gap: 4px !important;
+      flex-wrap: wrap !important;
+      margin-top: 5px !important;
+    }
+
+    .screen-ignyte-2 .reco li {
+      display: flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+      margin: 4px 0 !important;
+    }
+
+    .screen-ignyte-2 .dot {
+      width: 4px !important;
+      height: 4px !important;
+      border-radius: 50% !important;
+      background: #009f7a !important;
+      flex: none !important;
+    }
+
+    /* ── Evaluating Candidates Card ── */
+    .screen-ignyte-2 .evaluating-candidates-card {
+      position: absolute !important;
+      left: 45px !important;
+      /* Slightly indented from main card edge */
+      top: 196px !important;
+      /* Overlaps bottom of main card */
+      width: 172px !important;
+      background: #ffffff !important;
+      /* Solid White */
+      border: 1px solid #cfe6db !important;
+      border-radius: 7px !important;
+      padding: 9px 10px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+      z-index: 3 !important;
+      /* Sits in front of the operator card */
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card h3 {
+      color: #009f7a !important;
+      font-size: 8.5px !important;
+      font-weight: 700 !important;
+      margin-bottom: 6px !important;
+      font-family: var(--font-main), 'Inter', sans-serif !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .row {
+      background: #f3f8f6 !important;
+      border: 1px solid #e2ece8 !important;
+      border-radius: 5px !important;
+      padding: 5px 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-bottom: 5px !important;
+      box-shadow: none !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .avatar {
+      width: 24px !important;
+      height: 24px !important;
+      border-radius: 50% !important;
+      flex: none !important;
+      background-size: cover !important;
+      background-position: center !important;
+      border: 1px solid #e2ece8 !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .row .body {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .row .body .name {
+      font-size: 7.5px !important;
+      color: #4a5a54 !important;
+      font-weight: 600 !important;
+      line-height: 1 !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .badge {
+      font-size: 5.5px !important;
+      padding: 2.5px 6px !important;
+      border-radius: 2px !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      text-shadow: none !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .badge.draft {
+      background: #009f7a !important;
+      color: #ffffff !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .badge.review {
+      background: var(--green-lime) !important;
+      color: #1a1a1a !important;
+    }
+
+    /* ── Stat Card: 15+ Target Industries ── */
+    .screen-ignyte-2 .stat-card {
+      position: absolute !important;
+      right: 36px !important;
+      top: 60px !important;
+      width: 106px !important;
+      height: 36px !important;
+      background: #ffffff !important;
+      /* Solid White */
+      border: 1px solid #cfe6db !important;
+      border-radius: 7px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      padding: 0 8px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+      z-index: 2 !important;
+    }
+
+    .screen-ignyte-2 .stat-num {
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      color: #009f7a !important;
+      line-height: 1 !important;
+    }
+
+    .screen-ignyte-2 .stat-label {
+      font-size: 5.5px !important;
+      color: #5a6a64 !important;
+      font-weight: 600 !important;
+      line-height: 1.15 !important;
+      text-align: left !important;
+    }
+
+    /* ── Review Card: Reviewing search ── */
+    .screen-ignyte-2 .review-card {
+      position: absolute !important;
+      right: 36px !important;
+      top: 106px !important;
+      width: 129px !important;
+      height: 52px !important;
+      background: rgba(219, 237, 229, 0.9) !important;
+      /* Light glassy greenish-grey */
+      border: 1px solid #cfe6db !important;
+      border-radius: 7px !important;
+      padding: 6px 8px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+      z-index: 2 !important;
+    }
+
+    .screen-ignyte-2 .review-card h4 {
+      font-size: 7.5px !important;
+      color: #4a5a54 !important;
+      font-weight: 600 !important;
+      margin-bottom: 2px !important;
+      line-height: 1 !important;
+    }
+
+    .screen-ignyte-2 .reviewsearch {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+
+    .screen-ignyte-2 .reviewsearch .icon {
+      width: 22px !important;
+      height: 22px !important;
+      flex: none !important;
+    }
+
+    .screen-ignyte-2 .reviewsearch .text {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+    }
+
+    /* Floating micro-animation for Magnifying Glass loupe */
+    @keyframes searchHover {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(-0.8px, -0.8px);
+      }
+    }
+
+    .screen-ignyte-2 .magnifying-glass-anim {
+      animation: searchHover 3s ease-in-out infinite !important;
+      transform-origin: 21px 21px !important;
+    }
+
+    /* ── PROCESS COORDINATOR Badge ── */
+    .screen-ignyte-2 .op-tag {
+      position: absolute !important;
+      left: 232px !important;
+      top: 190px !important;
+      z-index: 10 !important;
+      font-size: 5px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.5px !important;
+      padding: 4px 5px !important;
+      border-radius: 2px !important;
+      background: var(--pink) !important;
+      color: #ffffff !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+      text-transform: uppercase !important;
+      width: 88px !important;
+      white-space: nowrap !important;
+    }
+
+    .screen-ignyte-2 .op-tag::before {
+      content: "• " !important;
+    }
+
+    /* ── Operator Card (Process Coordinator Card) ── */
+    .screen-ignyte-2 .operator-card {
+      position: absolute !important;
+      right: 36px !important;
+      top: 208px !important;
+      width: 190px !important;
+      background: rgba(219, 237, 229, 1) !important;
+      /* Light glassy greenish-grey */
+      border: 1px solid #cfe6db !important;
+      border-radius: 7px !important;
+      padding: 10px 12px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05) !important;
+      z-index: 2 !important;
+      /* Behind evaluating candidates card */
+    }
+
+    .screen-ignyte-2 .op-head {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .screen-ignyte-2 .op-icon {
+      width: 26px !important;
+      height: 26px !important;
+      background: none !important;
+      border: none !important;
+      flex: none !important;
+    }
+
+    .screen-ignyte-2 .op-head p {
+      font-size: 8px !important;
+      color: #3a4a44 !important;
+      line-height: 1.25 !important;
+      font-weight: 600 !important;
+    }
+
+    .screen-ignyte-2 .operator-card .check-row {
+      background: rgba(255, 255, 255, 0.6) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      border-radius: 5px !important;
+      padding: 6px 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-bottom: 6px !important;
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .screen-ignyte-2 .operator-card .check {
+      width: 11px !important;
+      height: 11px !important;
+      border-radius: 2px !important;
+      background: #009f7a !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: #ffffff !important;
+      font-size: 7px !important;
+      font-weight: bold !important;
+    }
+
+    .screen-ignyte-2 .operator-card .check-content {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+    }
+
+    .screen-ignyte-2 .operator-card .check-row .label {
+      font-size: 7.5px !important;
+      color: #5a6a64 !important;
+      font-weight: 600 !important;
+      line-height: 1.1 !important;
+    }
+
+    /* Progress Bar Glow Shimmer */
+    .screen-ignyte-2 .operator-card .progress-bar {
+      height: 3px !important;
+      width: 50% !important;
+      border-radius: 1.5px !important;
+      background: linear-gradient(90deg, #ed3b6b 0%, rgba(237, 59, 107, 0.2) 100%) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .screen-ignyte-2 .operator-card .progress-bar::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      height: 100% !important;
+      width: 50% !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%) !important;
+      animation: progressShimmer 1.8s infinite linear !important;
+    }
+
+    @keyframes progressShimmer {
+      0 {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(200%);
+      }
+    }
+
+    .screen-ignyte-2 .operator-card .skel-col {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+    }
+  </style>
 </head>
+
 <body class="page-dark">
   <div class="ignyte2-scaler">
     <div class="stage screen-ignyte-2">
       <div class="canvas">
 
-      <span class="tag lime">SEARCH CONSULTANT</span>
+        <span class="tag lime main-tag">TA SPECIALIST</span>
 
-      <div class="grid">
+        <div class="grid">
 
-        <!-- ── Main card: Target Companies + Recommendations ── -->
-        <div class="card card-main">
-          <div class="heading">Defining company targets per the role and spec</div>
+          <!-- ── Main card: Target Companies + Recommendations ── -->
+          <div class="card card-main">
+            <div class="heading">Defining company targets per the role and spec</div>
 
-          <div class="inner">
-            <h4>Target Companies</h4>
-            <div class="skel" style="width:90%;height:10px;margin-bottom:14px;"></div>
-            <div class="pill-row">
-              <div class="pill"></div><div class="pill"></div><div class="pill"></div>
-              <div class="pill"></div><div class="pill"></div>
+            <div class="inner">
+              <h4>Target Companies</h4>
+              <div class="skel" style="width:90%;height:5px;margin-bottom:8px;"></div>
+              <div class="pill-row">
+                <div class="pill"></div>
+                <div class="pill"></div>
+                <div class="pill"></div>
+                <div class="pill"></div>
+              </div>
+            </div>
+
+            <div class="inner pink reco">
+              <h4>Recommendations:</h4>
+              <ul style="list-style:none;">
+                <li><span class="dot"></span>
+                  <div class="skel" style="height:4px;"></div>
+                </li>
+                <li><span class="dot"></span>
+                  <div class="skel" style="height:4px;width:80%;"></div>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div class="inner pink reco">
-            <h4>Recommendations:</h4>
-            <ul style="list-style:none;">
-              <li><span class="dot"></span><div class="skel" style="height:8px;"></div></li>
-              <li><span class="dot"></span><div class="skel" style="height:8px;width:80%;"></div></li>
-            </ul>
-          </div>
-        </div>
+          <!-- ── Evaluating Candidates Card (spec-card) ── -->
+          <div class="card spec-card evaluating-candidates-card">
+            <h3>Evaluating candidates</h3>
 
-        <!-- ── Spec card: Draft Spec Structure — overlaps card-main bottom ── -->
-        <div class="card spec-card">
-          <h3>Draft Spec Structure</h3>
-
-          <div class="row">
-            <div class="avatar" style="background-image:url('images/img01.png');"></div>
-            <div class="body">
-              <div class="name">Company Vision</div>
-              <div class="skel" style="width:60%;"></div>
+            <div class="row">
+              <div class="avatar" style="background-image:url('images/Candidates 01.png');"></div>
+              <div class="body">
+                <div class="name">Company Vision</div>
+                <div class="skel" style="width:100%;"></div>
+              </div>
+              <span class="badge draft">Draft</span>
             </div>
-            <span class="badge draft">Draft</span>
-          </div>
 
-          <div class="row">
-            <div class="avatar" style="background-image:url('images/img02.png');"></div>
-            <div class="body">
-              <div class="name">Target Experience</div>
-              <div class="skel" style="width:55%;"></div>
+            <div class="row">
+              <div class="avatar" style="background-image:url('images/Candidates 02.png');"></div>
+              <div class="body">
+                <div class="name">Target Experience</div>
+                <div class="skel" style="width:100%;"></div>
+              </div>
+              <span class="badge draft">Draft</span>
             </div>
-            <span class="badge high">High</span>
-          </div>
 
-          <div class="row">
-            <div class="avatar" style="background-image:url('images/img03.png');"></div>
-            <div class="body">
-              <div class="name">Interview Questions</div>
-              <div class="skel" style="width:65%;"></div>
-            </div>
-            <span class="badge review">Review</span>
-          </div>
-        </div>
-
-        <!-- ── Stat card: 15+ Industries ── -->
-        <div class="card stat-card">
-          <div class="stat-num">15+</div>
-          <div class="stat-label">Target<br/>Industries</div>
-        </div>
-
-        <!-- ── Review card: Reviewing search ── -->
-        <div class="card review-card">
-          <div>
-          <h4>Reviewing search</h4>
-
-</div>
-<div class="reviewsearch">
-          <div class="icon">
-            <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M25.7298 0.073113C25.5786 -0.018574 25.3917 -0.0241155 25.2361 0.0569922L17.1465 4.26855L9.05686 0.0569922C9.04326 0.0499393 9.02814 0.0469167 9.01404 0.0413752C8.99237 0.0323073 8.97122 0.0232394 8.94905 0.0176978C8.93041 0.0131639 8.91177 0.0111487 8.89313 0.00862984C8.86945 0.00560719 8.84678 0.00208076 8.8226 0.00208076C8.80346 0.00208076 8.78482 0.00510349 8.76568 0.00762236C8.7425 0.0101412 8.71983 0.01266 8.69716 0.0187053C8.67752 0.0237431 8.65837 0.0323073 8.63923 0.0398639C8.62361 0.0459092 8.60699 0.0494356 8.59187 0.0569922L0.271031 4.38895C0.104281 4.4756 0 4.64789 0 4.8358V25.4669C0 25.6432 0.0921908 25.8064 0.242316 25.8976C0.322416 25.9465 0.413095 25.9706 0.503774 25.9706C0.583371 25.9706 0.662967 25.9515 0.736518 25.9137L8.82512 21.7022L13.2614 24.0135C13.3354 24.0523 13.4155 24.0704 13.4936 24.0704C13.6755 24.0704 13.8513 23.9717 13.941 23.7994C14.0694 23.5525 13.9737 23.2483 13.7268 23.1198L9.32839 20.8281V1.33406L16.6432 5.14209V14.8614C16.6432 15.1395 16.8684 15.3652 17.147 15.3652C17.4256 15.3652 17.6507 15.1395 17.6507 14.8614V5.14209L24.9656 1.33406V15.2392C24.9656 15.5173 25.1907 15.743 25.4693 15.743C25.7479 15.743 25.9731 15.5173 25.9731 15.2392V0.50384C25.9731 0.327519 25.8809 0.164296 25.7308 0.073113H25.7298ZM1.00755 5.14209L8.32034 1.33456V20.8291L1.00755 24.6367V5.14209Z" fill="url(#paint0_linear_3131_8390)"/>
-<path d="M27.7684 21.5903V21.5883C27.7659 17.8634 24.7332 14.8307 21.0067 14.8276C17.2818 14.8307 14.2491 17.8634 14.2461 21.5888C14.2461 22.9555 14.6542 24.2754 15.4254 25.4074C16.5383 27.0245 18.2879 28.0804 20.2163 28.3026C20.4576 28.3343 20.7161 28.35 21.0078 28.35C22.2652 28.3484 23.4516 28.0044 24.4717 27.3978C25.2163 28.4341 25.979 29.3721 26.248 29.6416C26.6228 30.0195 27.1226 30.227 27.6556 30.227C28.1886 30.227 28.6883 30.019 29.0611 29.6431C29.4359 29.2683 29.643 28.7696 29.644 28.2391C29.644 27.7071 29.4374 27.2069 29.0641 26.8331C28.7765 26.5409 27.8087 25.7666 26.8158 25.0527C27.0873 24.5948 27.309 24.0996 27.4712 23.5717C27.6656 22.9374 27.7659 22.2704 27.7684 21.5908V21.5903ZM21.0073 27.3419C20.7609 27.3419 20.5453 27.3293 20.3398 27.3021C18.6919 27.1122 17.2033 26.2129 16.2567 24.8376C15.6012 23.8754 15.2547 22.7515 15.2541 21.5888C15.2572 18.4185 17.838 15.8372 21.0073 15.8347C24.1775 15.8372 26.7588 18.418 26.7614 21.5878C26.7588 22.1681 26.6737 22.7364 26.5085 23.2759C26.3286 23.8613 26.0621 24.3988 25.7281 24.88C25.7241 24.8855 25.7175 24.888 25.714 24.8936C25.7085 24.9011 25.7085 24.9102 25.7034 24.9182C25.3266 25.4522 24.8626 25.9112 24.3367 26.284C24.3296 26.2885 24.3211 26.289 24.314 26.2935C24.3075 26.2981 24.3045 26.3051 24.2984 26.3097C23.3589 26.9636 22.2219 27.3404 21.0073 27.3419ZM28.3488 27.5424C28.5346 27.7278 28.6364 27.9746 28.6364 28.2366C28.6364 28.4986 28.5336 28.7444 28.3472 28.9308C28.1634 29.1162 27.9175 29.2185 27.6556 29.2185C27.3931 29.2185 27.1473 29.1162 26.9619 28.9293C26.7609 28.7283 26.0359 27.8462 25.2964 26.8175C25.639 26.5364 25.9548 26.223 26.2374 25.8769C27.2238 26.5862 28.1266 27.3167 28.3488 27.5424Z" fill="url(#paint1_linear_3131_8390)"/>
-<path d="M21.0116 16.9717C18.4681 16.9737 16.3965 19.0447 16.3945 21.5888C16.3945 21.8669 16.6197 22.0925 16.8978 22.0931C17.1759 22.0931 17.4016 21.8679 17.4016 21.5898C17.4031 19.6004 19.0232 17.9807 21.0121 17.9792C21.2902 17.9792 21.5154 17.7535 21.5154 17.475C21.5154 17.1964 21.2897 16.9717 21.0116 16.9717Z" fill="url(#paint2_linear_3131_8390)"/>
-<defs>
-<linearGradient id="paint0_linear_3131_8390" x1="12.9866" y1="0" x2="12.9866" y2="25.9706" gradientUnits="userSpaceOnUse">
-<stop stop-color="#23CEA7"/>
-<stop offset="1" stop-color="#126854"/>
-</linearGradient>
-<linearGradient id="paint1_linear_3131_8390" x1="21.945" y1="14.8276" x2="21.945" y2="30.227" gradientUnits="userSpaceOnUse">
-<stop stop-color="#23CEA7"/>
-<stop offset="1" stop-color="#126854"/>
-</linearGradient>
-<linearGradient id="paint2_linear_3131_8390" x1="18.955" y1="16.9717" x2="18.955" y2="22.0931" gradientUnits="userSpaceOnUse">
-<stop stop-color="#23CEA7"/>
-<stop offset="1" stop-color="#126854"/>
-</linearGradient>
-</defs>
-</svg>
-
-          </div>
-          <div class="text">
-            <div class="skel" style="width:90%;"></div>
-            <div class="skel" style="width:70%;"></div>
-          </div>
-        </div><!-- div2 -->
-        </div>
-
-        <!-- ── SEARCH OPERATOR label ── -->
-        <span class="tag pink op-tag">SEARCH OPERATOR</span>
-
-        <!-- ── Operator card ── -->
-        <div class="card operator-card">
-          <div class="op-head">
-            <div class="op-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="9" r="3"/>
-                <path d="M5 21a7 7 0 0 1 14 0"/>
-                <circle cx="18" cy="6" r="3" fill="#fff" stroke="#1f6f57"/>
-                <path d="m17 6 .8.8L19.5 5" stroke="#1f6f57"/>
-              </svg>
-            </div>
-            <p>Ensuring all shortlisted candidates<br/>match company criteria</p>
-          </div>
-
-          <div class="check-row">
-            <div class="check">✓</div>
-            <div class="check-content">
-              <div class="label">Check the process structured and organized</div>
-              <div class="progress-bar"></div>
+            <div class="row">
+              <div class="avatar" style="background-image:url('images/Candidates 03.png');"></div>
+              <div class="body">
+                <div class="name">Interview Questions</div>
+                <div class="skel" style="width:100%;"></div>
+              </div>
+              <span class="badge review">Review</span>
             </div>
           </div>
 
-          <div class="check-row">
-            <div class="check">✓</div>
-            <div class="skel-col">
-              <div class="skel" style="width: 80%;"></div>
-              <div class="skel" style="width: 60%;"></div>
+          <!-- ── Stat card: 15+ Target Industries ── -->
+          <div class="card stat-card">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Target<br />Industries</div>
+          </div>
+
+          <!-- ── Review card: Reviewing search ── -->
+          <div class="card review-card">
+            <div>
+              <h4>Reviewing search</h4>
+            </div>
+            <div class="reviewsearch">
+              <div class="icon">
+                <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M25.7298 0.073113C25.5786 -0.018574 25.3917 -0.0241155 25.2361 0.0569922L17.1465 4.26855L9.05686 0.0569922C9.04326 0.0499393 9.02814 0.0469167 9.01404 0.0413752C8.99237 0.0323073 8.97122 0.0232394 8.94905 0.0176978C8.93041 0.0131639 8.91177 0.0111487 8.89313 0.00862984C8.86945 0.00560719 8.84678 0.00208076 8.8226 0.00208076C8.80346 0.00208076 8.78482 0.00510349 8.76568 0.00762236C8.7425 0.0101412 8.71983 0.01266 8.69716 0.0187053C8.67752 0.0237431 8.65837 0.0323073 8.63923 0.0398639C8.62361 0.0459092 8.60699 0.0494356 8.59187 0.0569922L0.271031 4.38895C0.104281 4.4756 0 4.64789 0 4.8358V25.4669C0 25.6432 0.0921908 25.8064 0.242316 25.8976C0.322416 25.9465 0.413095 25.9706 0.503774 25.9706C0.583371 25.9706 0.662967 25.9515 0.736518 25.9137L8.82512 21.7022L13.2614 24.0135C13.3354 24.0523 13.4155 24.0704 13.4936 24.0704C13.6755 24.0704 13.8513 23.9717 13.941 23.7994C14.0694 23.5525 13.9737 23.2483 13.7268 23.1198L9.32839 20.8281V1.33406L16.6432 5.14209V14.8614C16.6432 15.1395 16.8684 15.3652 17.147 15.3652C17.4256 15.3652 17.6507 15.1395 17.6507 14.8614V5.14209L24.9656 1.33406V15.2392C24.9656 15.5173 25.1907 15.743 25.4693 15.743C25.7479 15.743 25.9731 15.5173 25.9731 15.2392V0.50384C25.9731 0.327519 25.8809 0.164296 25.7308 0.073113H25.7298ZM1.00755 5.14209L8.32034 1.33456V20.8291L1.00755 24.6367V5.14209Z"
+                    fill="url(#paint0_linear_3131_8390)" />
+                  <g class="magnifying-glass-anim">
+                    <path
+                      d="M27.7684 21.5903V21.5883C27.7659 17.8634 24.7332 14.8307 21.0067 14.8276C17.2818 14.8307 14.2491 17.8634 14.2461 21.5888C14.2461 22.9555 14.6542 24.2754 15.4254 25.4074C16.5383 27.0245 18.2879 28.0804 20.2163 28.3026C20.4576 28.3343 20.7161 28.35 21.0078 28.35C22.2652 28.3484 23.4516 28.0044 24.4717 27.3978C25.2163 28.4341 25.979 29.3721 26.248 29.6416C26.6228 30.0195 27.1226 30.227 27.6556 30.227C28.1886 30.227 28.6883 30.019 29.0611 29.6431C29.4359 29.2683 29.643 28.7696 29.644 28.2391C29.644 27.7071 29.4374 27.2069 29.0641 26.8331C28.7765 26.5409 27.8087 25.7666 26.8158 25.0527C27.0873 24.5948 27.309 24.0996 27.4712 23.5717C27.6656 22.9374 27.7659 22.2704 27.7684 21.5908V21.5903ZM21.0073 27.3419C20.7609 27.3419 20.5453 27.3293 20.3398 27.3021C18.6919 27.1122 17.2033 26.2129 16.2567 24.8376C15.6012 23.8754 15.2547 22.7515 15.2541 21.5888C15.2572 18.4185 17.838 15.8372 21.0073 15.8347C24.1775 15.8372 26.7588 18.418 26.7614 21.5878C26.7588 22.1681 26.6737 22.7364 26.5085 23.2759C26.3286 23.8613 26.0621 24.3988 25.7281 24.88C25.7241 24.8855 25.7175 24.888 25.714 24.8936C25.7085 24.9011 25.7085 24.9102 25.7034 24.9182C25.3266 25.4522 24.8626 25.9112 24.3367 26.284C24.3296 26.2885 24.3211 26.289 24.314 26.2935C24.3075 26.2981 24.3045 26.3051 24.2984 26.3097C23.3589 26.9636 22.2219 27.3404 21.0073 27.3419ZM28.3488 27.5424C28.5346 27.7278 28.6364 27.9746 28.6364 28.2366C28.6364 28.4986 28.5336 28.7444 28.3472 28.9308C28.1634 29.1162 27.9175 29.2185 27.6556 29.2185C27.3931 29.2185 27.1473 29.1162 26.9619 28.9293C26.7609 28.7283 26.0359 27.8462 25.2964 26.8175C25.639 26.5364 25.9548 26.223 26.2374 25.8769C27.2238 26.5862 28.1266 27.3167 28.3488 27.5424Z"
+                      fill="url(#paint1_linear_3131_8390)" />
+                  </g>
+                  <path
+                    d="M21.0116 16.9717C18.4681 16.9737 16.3965 19.0447 16.3945 21.5888C16.3945 21.8669 16.6197 22.0925 16.8978 22.0931C17.1759 22.0931 17.4016 21.8679 17.4016 21.5898C17.4031 19.6004 19.0232 17.9807 21.0121 17.9792C21.2902 17.9792 21.5154 17.7535 21.5154 17.475C21.5154 17.1964 21.2897 16.9717 21.0116 16.9717Z"
+                    fill="url(#paint2_linear_3131_8390)" />
+                  <defs>
+                    <linearGradient id="paint0_linear_3131_8390" x1="12.9866" y1="0" x2="12.9866" y2="25.9706"
+                      gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#23CEA7" />
+                      <stop offset="1" stop-color="#126854" />
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_3131_8390" x1="21.945" y1="14.8276" x2="21.945" y2="30.227"
+                      gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#23CEA7" />
+                      <stop offset="1" stop-color="#126854" />
+                    </linearGradient>
+                    <linearGradient id="paint2_linear_3131_8390" x1="18.955" y1="16.9717" x2="18.955" y2="22.0931"
+                      gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#23CEA7" />
+                      <stop offset="1" stop-color="#126854" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <div class="text">
+                <div class="skel" style="width:90%;"></div>
+                <div class="skel" style="width:70%;"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-      </div><!-- .grid -->
+          <!-- ── PROCESS COORDINATOR label ── -->
+          <span class="tag pink op-tag">PROCESS COORDINATOR</span>
+
+          <!-- ── Operator card ── -->
+          <div class="card operator-card">
+            <div class="op-head">
+              <div class="op-icon">
+                <img src="images/Search operator icon.svg" style="width:100%; height:100%;"
+                  alt="process coordinator icon" />
+              </div>
+              <p>Ensuring all shortlisted candidates<br />match company criteria</p>
+            </div>
+
+            <div class="check-row">
+              <div class="check">✓</div>
+              <div class="check-content">
+                <div class="label">Check the process is structured and organized</div>
+                <div class="progress-bar"></div>
+              </div>
+            </div>
+
+            <div class="check-row">
+              <div class="check">✓</div>
+              <div class="skel-col">
+                <div class="skel" style="width: 80%;"></div>
+                <div class="skel" style="width: 60%;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- .grid -->
 
       </div><!-- .canvas -->
     </div><!-- .stage -->
@@ -169,13 +648,57 @@
   <script>
     (function () {
       var scaler = document.querySelector('.ignyte2-scaler');
-      var stage  = scaler.querySelector('.stage');
+      var stage = scaler.querySelector('.stage');
       function resize() {
         stage.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
       }
       resize();
       window.addEventListener('resize', resize);
     })();
+
+    // Premium loop-based counter animation for "15+"
+    (function () {
+      var statNum = document.querySelector('.screen-ignyte-2 .stat-num');
+      if (!statNum) return;
+
+      // Easy configuration to customize start, end, speed and hold duration
+      var CONFIG = {
+        startVal: 1,
+        endVal: 15,
+        duration: 1800, // Duration in ms to count up from startVal to endVal
+        holdTime: 3000   // Time in ms to hold the maximum value before repeating
+      };
+
+      function runCounter() {
+        var startTime = null;
+        var range = CONFIG.endVal - CONFIG.startVal;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var percentage = Math.min(elapsed / CONFIG.duration, 1);
+
+          // Smooth Ease-Out Exponential Easing function for premium dashboard feel
+          var easeProgress = percentage === 1 ? 1 : 1 - Math.pow(2, -10 * percentage);
+          var currentVal = Math.floor(CONFIG.startVal + range * easeProgress);
+
+          statNum.textContent = currentVal + '+';
+
+          if (elapsed < CONFIG.duration) {
+            requestAnimationFrame(step);
+          } else {
+            // Reached destination, wait for holdTime, then reset and loop
+            setTimeout(runCounter, CONFIG.holdTime);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      // Initialize counter loop
+      runCounter();
+    })();
   </script>
 </body>
+
 </html>

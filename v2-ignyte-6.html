@@ -1,297 +1,383 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>IGNYTE — Assistant Report</title>
-<link rel="stylesheet" href="style.css" />
-<style>
-  .ignyte6-scaler {
-    width: 100%;
-    max-width: 458px;
-    aspect-ratio: 458 / 400;
-    position: relative;
-    overflow: hidden;
-  }
-  .ignyte6-scaler > .scene {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform-origin: top left;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IGNYTE — Assistant Report</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .ignyte6-scaler {
+      width: 100%;
+      max-width: 458px;
+      aspect-ratio: 458 / 400;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ignyte6-scaler>.scene {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
+    }
+
+    /* ── SCOPED OVERRIDES TO MATCH FIGMA EXACTLY ── */
+    .screen-v2-ignyte-6 .tag-asst {
+      background: #008eb0 !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+      border-radius: 4px !important;
+      padding: 6px 12px !important;
+      font-size: 10px !important;
+    }
+
+    .screen-v2-ignyte-6 .tag-asst::before {
+      background: #ffffff !important;
+    }
+
+    .screen-v2-ignyte-6 .card {
+      background: linear-gradient(to bottom, #FFFFFF 0%, #B6D5CF 100%) !important;
+      /* Left cards soft green */
+      border: 1px solid #dcece3 !important;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Right column cards should be white */
+    .screen-v2-ignyte-6 .col-right .card {
+      border: 1px solid #e1ece6 !important;
+      background: linear-gradient(to bottom, #FFFFFF 0%, #B6D5CF 100%) !important;
+
+    }
+
+    .screen-v2-ignyte-6 .intro-text {
+      font-weight: 300 !important;
+      color: #798a82 !important;
+      font-size: 20px !important;
+    }
+
+    .screen-v2-ignyte-6 .sec-h {
+      color: #11a083 !important;
+      font-weight: 500 !important;
+    }
+
+    .screen-v2-ignyte-6 .sec-h .t {
+      color: inherit !important;
+    }
+
+    .screen-v2-ignyte-6 .req-row {
+      border-bottom: none !important;
+      padding: 4px 0 !important;
+    }
+
+    .screen-v2-ignyte-6 .r-lbl {
+      color: #8a9890 !important;
+    }
+
+    .screen-v2-ignyte-6 .r-val {
+      text-align: right !important;
+      font-weight: 400 !important;
+      color: #6a7c72 !important;
+    }
+
+    .screen-v2-ignyte-6 .r-val.hl {
+      color: #11a083 !important;
+      font-weight: 500 !important;
+    }
+
+    .screen-v2-ignyte-6 .bar-track {
+      background: #4e5e56 !important;
+      height: 6px !important;
+      border-radius: 3px !important;
+    }
+
+    .screen-v2-ignyte-6 .bf {
+      border-radius: 3px !important;
+      background: #23CEA7 !important;
+    }
+
+    @keyframes fillS { 0% { width: 0; } 70% { width: 68%; } 100% { width: 68%; } }
+    @keyframes fillM { 0% { width: 0; } 70% { width: 55%; } 100% { width: 55%; } }
+    @keyframes fillI { 0% { width: 0; } 70% { width: 35%; } 100% { width: 35%; } }
+
+    .screen-v2-ignyte-6 .bf.s {
+      background: #23CEA7 !important;
+      animation: fillS 3.5s ease-out infinite !important;
+    }
+
+    .screen-v2-ignyte-6 .bf.m {
+      background: #23CEA7 !important;
+      animation: fillM 3.5s ease-out infinite !important;
+    }
+
+    .screen-v2-ignyte-6 .bf.i {
+      background: #23CEA7 !important;
+      animation: fillI 3.5s ease-out infinite !important;
+    }
+
+    .screen-v2-ignyte-6 .strat-p {
+      color: #798a82 !important;
+    }
+
+    .screen-v2-ignyte-6 .report-lbl {
+      color: #798a82 !important;
+      margin-bottom: 24px !important;
+    }
+
+    .screen-v2-ignyte-6 .final-lbl {
+      color: #11a083 !important;
+      margin-bottom: 10px !important;
+    }
+
+    .screen-v2-ignyte-6 .st-k {
+      color: #8a9890 !important;
+    }
+
+    .screen-v2-ignyte-6 .st-n {
+      color: #11a083 !important;
+    }
+
+    .screen-v2-ignyte-6 .st-nm {
+      color: #11a083 !important;
+      font-weight: 400 !important;
+    }
+
+    .screen-v2-ignyte-6 .card-cands h3 {
+      font-weight: 500 !important;
+      color: #798a82 !important;
+      font-size: 18px !important;
+      margin-bottom: 12px !important;
+    }
+
+
+    .screen-v2-ignyte-6 .c-row {
+      background: #f4f8f6 !important;
+      /* Soft grey/green row bg */
+      border: 1px solid #eef3f1 !important;
+      border-radius: 8px !important;
+      padding: 10px 14px !important;
+      box-shadow: none !important;
+    }
+
+    .screen-v2-ignyte-6 .c-av {
+      background-color: #e1ebe6 !important;
+      /* Fallback color */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+      width: 44px !important;
+      height: 44px !important;
+    }
+
+    /* Skeleton bars on the right */
+    .screen-v2-ignyte-6 .col-right .sk {
+      background: linear-gradient(90deg, #e1e9e5 0%, #edf2f0 50%, #e1e9e5 100%) !important;
+    }
+  </style>
 </head>
+
 <body class="page-dark">
   <div class="ignyte6-scaler">
-  <div class="scene screen-v2-ignyte-6">
-    <div class="canvas">
+    <div class="scene screen-v2-ignyte-6">
+      <div class="canvas">
 
-      <!-- ASSISTANT tag -->
-      <span class="tag-asst">ASSISTANT</span>
+        <!-- ASSISTANT tag -->
+        <span class="tag-asst">ASSISTANT</span>
 
-      <!-- 2-column main grid -->
-      <div class="main-grid">
+        <!-- 2-column main grid -->
+        <div class="main-grid">
 
-        <!-- ════════ LEFT COLUMN ════════ -->
-        <div class="col-left">
+          <!-- ════════ LEFT COLUMN ════════ -->
+          <div class="col-left">
 
-          <!-- Card 1: intro statement -->
-          <div class="card card-intro">
-            <p class="intro-text">Tracked, structured, ready formatted report.</p>
-            <div class="sk sk-bar"></div>
-          </div>
-
-          <!-- Card 2: requirements + strategy -->
-          <div class="card card-search">
-            <h2 class="sec-h"><span class="t">Search</span> Requirements</h2>
-
-            <div class="req-grid">
-              <div class="req-row">
-                <span class="r-lbl">Context</span>
-                <span class="r-val">Mid-market · Chicago</span>
-              </div>
-              <div class="req-row">
-                <span class="r-lbl">Competencies</span>
-                <span class="r-val">Strategy · M&amp;A · Board</span>
-              </div>
-              <div class="req-row">
-                <span class="r-lbl">Experience</span>
-                <span class="r-val">12+ years · Deep domain</span>
-              </div>
-              <div class="req-row">
-                <span class="r-lbl">Interviews</span>
-                <span class="r-val hl">4 stages · 8 questions</span>
-              </div>
+            <!-- Card 1: intro statement -->
+            <div class="card card-intro">
+              <p class="intro-text">Tracked, structured, ready formatted report.</p>
+              <div class="sk sk-bar"></div>
             </div>
 
-            <div class="div"></div>
+            <!-- Card 2: requirements + strategy -->
+            <div class="card card-search">
+              <h2 class="sec-h">Search Requirements</h2>
 
-            <h2 class="sec-h"><span class="t">Search</span> strategy</h2>
-            <p class="strat-p">Industries: Consulting · PE · Corp Strategy · SaaS</p>
-            <p class="strat-p">Companies: Ashford · Clearpoint · Vantage + 34 more</p>
-
-            <div class="bars">
-              <div class="bar-row">
-                <span class="bar-lbl">Strategy</span>
-                <div class="bar-track"><div class="bf s"></div></div>
-              </div>
-              <div class="bar-row">
-                <span class="bar-lbl">M&amp;A</span>
-                <div class="bar-track"><div class="bf m"></div></div>
-              </div>
-              <div class="bar-row">
-                <span class="bar-lbl">Industry</span>
-                <div class="bar-track"><div class="bf i"></div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: structured report circles -->
-          <div class="card card-report">
-            <p class="report-lbl">Structured formatted report</p>
-            <div class="circles-wrap">
-              <!--
-                5 circles connected by an S-curve wave line.
-                Wave: circles at cy=78; peaks y=42 (between c1-c2, c3-c4),
-                      troughs y=114 (between c2-c3, c4-c5).
-                cx positions: 52, 146, 240, 334, 428 (spacing 94px).
-                Rings use stroke-dasharray/dashoffset for partial arcs starting at top.
-                Teal arcs on left circles → lime arcs on right circles.
-              -->
-              <svg viewBox="0 10 480 148" xmlns="http://www.w3.org/2000/svg"
-                   width="100%" height="auto" overflow="visible">
-                <defs>
-                  <!-- Wave gradient teal → lime -->
-                  <linearGradient id="waveLg6" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   stop-color="#17a98b"/>
-                    <stop offset="55%"  stop-color="#23CEA7"/>
-                    <stop offset="100%" stop-color="#C0E421"/>
-                  </linearGradient>
-                  <!-- Circle fill gradients -->
-                  <radialGradient id="cgA6" cx="36%" cy="30%" r="65%">
-                    <stop offset="0%"   stop-color="#ffffff"/>
-                    <stop offset="100%" stop-color="#dbe9e1"/>
-                  </radialGradient>
-                  <radialGradient id="cgB6" cx="36%" cy="30%" r="65%">
-                    <stop offset="0%"   stop-color="#f8fcfa"/>
-                    <stop offset="100%" stop-color="#d8e7de"/>
-                  </radialGradient>
-                  <!-- Drop shadow -->
-                  <filter id="csh6" x="-30%" y="-30%" width="160%" height="160%">
-                    <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="rgba(0,0,0,0.15)"/>
-                  </filter>
-                </defs>
-
-                <!--
-                  S-curve connecting wave (drawn behind circles).
-                  Path goes through each circle center:
-                  c1(52,78) → up peak(99,42) → c2(146,78) → down trough(193,114) → c3(240,78)
-                  → up peak(287,42) → c4(334,78) → down trough(381,114) → c5(428,78)
-                -->
-                <path d="M 52 78
-                         C 82 42  116 42  146 78
-                         C 176 114 210 114 240 78
-                         C 270 42  304 42  334 78
-                         C 364 114 398 114 428 78"
-                  stroke="url(#waveLg6)" stroke-width="4" fill="none"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-
-                <!-- ── CIRCLE 1  (cx=52, fill r=40, ring r=47) ──
-                     ~220° teal arc. C=2π×47=295.3, offset=-(3/4×295.3)=−221.5≈−222
-                     vis=220/360×295.3=180.4, gap=114.9  -->
-                <circle cx="52" cy="78" r="40" fill="url(#cgA6)" filter="url(#csh6)"/>
-                <circle cx="52" cy="78" r="47" fill="none" stroke="#17a98b" stroke-width="4.5"
-                  stroke-dasharray="180 115" stroke-dashoffset="-222" stroke-linecap="round"/>
-                <!-- Icon: clipboard + person below -->
-                <g transform="translate(52,78)" fill="none" stroke="#4e5e56" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="-11" y="-20" width="22" height="26" rx="2.5"/>
-                  <line x1="-5.5" y1="-12" x2="5.5" y2="-12"/>
-                  <line x1="-5.5" y1="-5"  x2="5.5" y2="-5"/>
-                  <line x1="-5.5" y1="2"   x2="2"   y2="2"/>
-                  <circle cx="0" cy="15" r="5.5" stroke-width="1.8"/>
-                </g>
-
-                <!-- ── CIRCLE 2  (cx=146, fill r=47, ring r=54) ──
-                     ~270° teal arc. C=2π×54=339.3, offset=-(3/4×339.3)=−254.5≈−254
-                     vis=270/360×339.3=254.5, gap=84.8  -->
-                <circle cx="146" cy="78" r="47" fill="url(#cgA6)" filter="url(#csh6)"/>
-                <circle cx="146" cy="78" r="54" fill="none" stroke="#17a98b" stroke-width="4.5"
-                  stroke-dasharray="255 84" stroke-dashoffset="-254" stroke-linecap="round"/>
-                <!-- Icon: person silhouette -->
-                <g transform="translate(146,78)" fill="none" stroke="#4e5e56" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="0" cy="-13" r="12"/>
-                  <path d="M-15 18 C-15 5 15 5 15 18"/>
-                </g>
-
-                <!-- ── CIRCLE 3  (cx=240, fill r=52, ring r=60) – largest ──
-                     ~305° teal arc. C=2π×60=376.99, offset=-(3/4×376.99)=−282.7≈−283
-                     vis=305/360×376.99=319.8, gap=57.2  -->
-                <circle cx="240" cy="78" r="52" fill="url(#cgB6)" filter="url(#csh6)"/>
-                <circle cx="240" cy="78" r="60" fill="none" stroke="#23CEA7" stroke-width="5"
-                  stroke-dasharray="320 57" stroke-dashoffset="-283" stroke-linecap="round"/>
-                <!-- Icon: document with text lines -->
-                <g transform="translate(240,78)" fill="none" stroke="#4e5e56" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="-14" y="-22" width="28" height="34" rx="3"/>
-                  <line x1="-8" y1="-12" x2="8"  y2="-12"/>
-                  <line x1="-8" y1="-3"  x2="8"  y2="-3"/>
-                  <line x1="-8" y1="6"   x2="4"  y2="6"/>
-                </g>
-
-                <!-- ── CIRCLE 4  (cx=334, fill r=47, ring r=54) ──
-                     ~285° lime arc. C=339.3, offset=-254
-                     vis=285/360×339.3=268.7, gap=70.6  -->
-                <circle cx="334" cy="78" r="47" fill="url(#cgA6)" filter="url(#csh6)"/>
-                <circle cx="334" cy="78" r="54" fill="none" stroke="#C0E421" stroke-width="4.5"
-                  stroke-dasharray="269 70" stroke-dashoffset="-254" stroke-linecap="round"/>
-                <!-- Icon: document with 'A' text marker -->
-                <g transform="translate(334,78)" fill="none" stroke="#4e5e56" stroke-width="2.2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="-13" y="-21" width="26" height="32" rx="3"/>
-                  <line x1="-7" y1="-12" x2="7"  y2="-12"/>
-                  <line x1="-7" y1="-4"  x2="7"  y2="-4"/>
-                  <!-- stylised 'A' letterform -->
-                  <path d="M-5 9 L0 1 L5 9"/>
-                  <line x1="-2.5" y1="6.5" x2="2.5" y2="6.5"/>
-                </g>
-
-                <!-- ── CIRCLE 5  (cx=428, fill r=40, ring r=47) ──
-                     ~200° lime arc. C=295.3, offset=-222
-                     vis=200/360×295.3=164.1, gap=131.2  -->
-                <circle cx="428" cy="78" r="40" fill="url(#cgA6)" filter="url(#csh6)"/>
-                <circle cx="428" cy="78" r="47" fill="none" stroke="#C0E421" stroke-width="4.5"
-                  stroke-dasharray="164 131" stroke-dashoffset="-222" stroke-linecap="round"/>
-                <!-- Icon: person with checkmark -->
-                <g transform="translate(428,78)" fill="none" stroke="#4e5e56" stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="0" cy="-13" r="11"/>
-                  <path d="M-13 17 C-13 6 13 6 13 17"/>
-                  <polyline points="-5,1 -2,5 6,-3" stroke-width="2.4"/>
-                </g>
-              </svg>
-            </div>
-          </div>
-
-        </div><!-- .col-left -->
-
-        <!-- ════════ RIGHT COLUMN ════════ -->
-        <div class="col-right">
-
-          <p class="final-lbl">FINAL REPORT</p>
-
-          <!-- Stats card -->
-          <div class="card card-stats">
-            <div class="st-row">
-              <div class="st">
-                <div class="st-k">EVALUATE</div>
-                <div class="st-n">29</div>
-              </div>
-              <div class="st">
-                <div class="st-k">SHORTLISTED</div>
-                <div class="st-n">03</div>
-              </div>
-              <div class="st">
-                <div class="st-k">RECOMMENDED</div>
-                <div class="st-nm">Priya Nair · 93</div>
-              </div>
-            </div>
-            <div class="st-foot">
-              <span class="ready-t">Ready to present</span>
-              <span class="view-t">View report →</span>
-            </div>
-          </div>
-
-          <!-- Analysis candidates card -->
-          <div class="card card-cands">
-            <h3>Analysis candidates</h3>
-            <div class="cands-list">
-
-              <div class="c-row">
-                <div class="c-av"></div>
-                <div class="c-lines">
-                  <div class="sk sk-90"></div>
-                  <div class="sk sk-65"></div>
+              <div class="req-grid">
+                <div class="req-row">
+                  <span class="r-lbl">Context</span>
+                  <span class="r-val">Mid-market · Chicago</span>
+                </div>
+                <div class="req-row">
+                  <span class="r-lbl">Competencies</span>
+                  <span class="r-val">Strategy · M&amp;A · Board</span>
+                </div>
+                <div class="req-row">
+                  <span class="r-lbl">Experience</span>
+                  <span class="r-val">12+ years · Deep domain</span>
+                </div>
+                <div class="req-row">
+                  <span class="r-lbl">Interviews</span>
+                  <span class="r-val hl">4 stages · 8 questions</span>
                 </div>
               </div>
 
-              <div class="c-row">
-                <div class="c-av"></div>
-                <div class="c-lines">
-                  <div class="sk sk-90"></div>
-                  <div class="sk sk-65"></div>
+              <div class="div"></div>
+
+              <h2 class="sec-h">Search strategy</h2>
+              <p class="strat-p">Industries: Consulting · PE · Corp Strategy · SaaS</p>
+              <p class="strat-p">Companies: Ashford · Clearpoint · Vantage + 34 more</p>
+
+              <div class="bars">
+                <div class="bar-row">
+                  <span class="bar-lbl">Strategy</span>
+                  <div class="bar-track">
+                    <div class="bf s"></div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-lbl">M&amp;A</span>
+                  <div class="bar-track">
+                    <div class="bf m"></div>
+                  </div>
+                </div>
+                <div class="bar-row">
+                  <span class="bar-lbl">Industry</span>
+                  <div class="bar-track">
+                    <div class="bf i"></div>
+                  </div>
                 </div>
               </div>
-
-              <div class="c-row">
-                <div class="c-av"></div>
-                <div class="c-lines">
-                  <div class="sk sk-90"></div>
-                  <div class="sk sk-65"></div>
-                </div>
-              </div>
-
             </div>
-          </div>
 
-        </div><!-- .col-right -->
+            <!-- Card 3: structured report circles -->
+            <div class="card card-report">
+              <p class="report-lbl">Structured formatted report</p>
+              <img src="./images/6th-prgress-icons.svg" style="width: 100%;" />
+            </div>
 
-      </div><!-- .main-grid -->
-    </div><!-- .canvas -->
-  </div>
+          </div><!-- .col-left -->
+
+          <!-- ════════ RIGHT COLUMN ════════ -->
+          <div class="col-right">
+
+            <p class="final-lbl">FINAL REPORT</p>
+
+            <!-- Stats card -->
+            <div class="card card-stats">
+              <div class="st-row">
+                <div class="st">
+                  <div class="st-k">EVALUATED</div>
+                  <div class="st-n num-counter" data-val="29">29</div>
+                </div>
+                <div class="st">
+                  <div class="st-k">SHORTLISTED</div>
+                  <div class="st-n num-counter" data-val="3" data-pad="2">03</div>
+                </div>
+                <div class="st">
+                  <div class="st-k">RECOMMENDED</div>
+                  <div class="st-nm">Priya Nair &middot; <strong style="font-weight: 800;" class="num-counter" data-val="93">93</strong></div>
+                </div>
+              </div>
+              <div class="st-foot">
+                <span class="ready-t">Ready to present</span>
+                <span class="view-t">View report →</span>
+              </div>
+            </div>
+
+            <!-- Analysis candidates card -->
+            <div class="card card-cands">
+              <h3>Analysis candidates</h3>
+              <div class="cands-list">
+
+                <div class="c-row">
+                  <div class="c-av"
+                    style="background-image:url('images/Candidates%2001.png'); background-size: cover; background-position: center; border-radius: 50%;">
+                  </div>
+                  <div class="c-lines">
+                    <div class="c-name"
+                      style="font-size: 10px; color: #6a7c72; font-weight: 600; text-transform: uppercase;">PRIYA NAIR
+                    </div>
+                    <div class="sk sk-90" style="margin-top: -2px;"></div>
+                  </div>
+                </div>
+
+                <div class="c-row">
+                  <div class="c-av"
+                    style="background-image:url('images/Candidates%2002.png'); background-size: cover; background-position: center; border-radius: 50%;">
+                  </div>
+                  <div class="c-lines">
+                    <div class="sk sk-90"></div>
+                    <div class="sk sk-65"></div>
+                  </div>
+                </div>
+
+                <div class="c-row">
+                  <div class="c-av"
+                    style="background-image:url('images/Candidates%2003.png'); background-size: cover; background-position: center; border-radius: 50%;">
+                  </div>
+                  <div class="c-lines">
+                    <div class="sk sk-90"></div>
+                    <div class="sk sk-65"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!-- .col-right -->
+
+        </div><!-- .main-grid -->
+      </div><!-- .canvas -->
+    </div>
   </div><!-- .ignyte6-scaler -->
 
   <script>
     (function () {
       var scaler = document.querySelector('.ignyte6-scaler');
-      var scene  = scaler.querySelector('.scene');
+      var scene = scaler.querySelector('.scene');
       function resize() {
         scene.style.transform = 'scale(' + (scaler.offsetWidth / 458) + ')';
       }
       resize();
       window.addEventListener('resize', resize);
+
+      // Number counter animation logic
+      function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+      function runCounters() {
+        var counters = document.querySelectorAll('.num-counter');
+        counters.forEach(function (counter) {
+          var target = parseInt(counter.getAttribute('data-val'), 10);
+          var pad = parseInt(counter.getAttribute('data-pad'), 10) || 0;
+          var duration = 1500;
+          var startTime = null;
+
+          function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = timestamp - startTime;
+            var t = Math.min(progress / duration, 1);
+            var current = Math.floor(easeOutCubic(t) * target);
+
+            if (pad > 0) {
+              counter.textContent = current.toString().padStart(pad, '0');
+            } else {
+              counter.textContent = current;
+            }
+
+            if (progress < duration) {
+              window.requestAnimationFrame(step);
+            } else {
+              if (pad > 0) {
+                counter.textContent = target.toString().padStart(pad, '0');
+              } else {
+                counter.textContent = target;
+              }
+            }
+          }
+          window.requestAnimationFrame(step);
+        });
+      }
+
+      // Initial run and then loop every 3.5 seconds
+      runCounters();
+      setInterval(runCounters, 3500);
     })();
   </script>
 </body>
+
 </html>

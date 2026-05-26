@@ -19,7 +19,7 @@
 /* ── Design tokens ── */
 :root {
   /* Primary greens */
-  --green: #23CEA7;
+  --green: #0DB998;
   --green-dark: #1f6f57;
   --green-deep: #0f3a2e;
   --green-soft: #d8efe6;
@@ -328,7 +328,7 @@ body.page-scene {
   align-items: center;
   gap: 8px;
   margin-bottom: 6px;
-  box-shadow: inset 0 0 6px rgba(255,255,255,0.7), 0 2px 4px rgba(0,0,0,0.04);
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.7), 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .screen-ignyte-2 .spec-card .avatar {
@@ -426,7 +426,7 @@ body.page-scene {
   background-size: 5px 5px, 5px 5px, 100% 100%;*/
   border: 1px solid #bce2cf;
   border-radius: 7px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .screen-ignyte-2 .review-card h4 {
@@ -487,7 +487,7 @@ body.page-scene {
   padding: 14px;
   background: linear-gradient(180deg, #f1f8f5, #d2ebde);
   border: none;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   border-radius: 7px;
 }
 
@@ -531,7 +531,7 @@ body.page-scene {
   align-items: flex-start;
   gap: 10px;
   margin-bottom: 8px;
-  box-shadow: inset 0 0 10px rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.03);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7), 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .screen-ignyte-2 .check {
@@ -581,7 +581,7 @@ body.page-scene {
   height: 4px;
   width: 70%;
   border-radius: 2px;
-  background: linear-gradient(90deg, #ed3b6b 0%, rgba(237,59,107,0) 100%);
+  background: linear-gradient(90deg, #ed3b6b 0%, rgba(237, 59, 107, 0) 100%);
 }
 
 
@@ -629,7 +629,7 @@ body.page-scene {
   background: rgba(255, 255, 255, 0.6);
   border: 1.5px solid rgba(255, 255, 255, 0.9);
   border-radius: 18px;
-  box-shadow: inset 0 0 16px rgba(255,255,255,0.7), 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.7), 0 12px 30px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(12px);
 }
 
@@ -642,7 +642,7 @@ body.page-scene {
   background: linear-gradient(180deg, #ffffff, #d2ebde);
   border: none;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
-  
+
 }
 
 .screen-ignyte-3 .photo,
@@ -658,7 +658,8 @@ body.page-scene {
 
 .screen-ignyte-3 .name,
 .screen-v2-ignyte-3 .name {
-  font-size: 22.3px; /* 15px * 1.485 */
+  font-size: 22.3px;
+  /* 15px * 1.485 */
   color: #3a4a44;
   font-weight: 500;
   margin-bottom: 6px;
@@ -666,7 +667,8 @@ body.page-scene {
 
 .screen-ignyte-3 .role,
 .screen-v2-ignyte-3 .role {
-  font-size: 13.4px; /* 9px equivalent */
+  font-size: 13.4px;
+  /* 9px equivalent */
   color: #1f362e;
   font-weight: 700;
   margin-bottom: 18px;
@@ -693,7 +695,8 @@ body.page-scene {
 .screen-ignyte-3 .shortlist h4 {
   color: #5a6b65;
   font-weight: 500;
-  font-size: 13.4px; /* 9px equivalent */
+  font-size: 13.4px;
+  /* 9px equivalent */
   margin-bottom: 18px;
 }
 
@@ -755,7 +758,8 @@ body.page-scene {
 
 .screen-ignyte-3 .shortlisted .lbl,
 .screen-v2-ignyte-3 .shortlisted .lbl {
-  font-size: 13.4px; /* 9px equivalent */
+  font-size: 13.4px;
+  /* 9px equivalent */
   color: #fff;
   line-height: 1.2;
 }
@@ -775,7 +779,8 @@ body.page-scene {
   display: inline-block;
   background: #104233;
   color: #fff;
-  font-size: 10.4px; /* 7px equivalent */
+  font-size: 10.4px;
+  /* 7px equivalent */
   font-weight: 700;
   letter-spacing: .5px;
   padding: 5px 10px;
@@ -797,7 +802,8 @@ body.page-scene {
 
 .screen-ignyte-3 .rec-title,
 .screen-v2-ignyte-3 .rec-title {
-  font-size: 13.4px; /* 9px equivalent */
+  font-size: 13.4px;
+  /* 9px equivalent */
   color: #222;
   line-height: 1.4;
   margin-bottom: 18px;
@@ -836,7 +842,8 @@ body.page-scene {
 .screen-ignyte-3 .message h3,
 .screen-v2-ignyte-3 .message h3 {
   color: #118461;
-  font-size: 16.3px; /* 11px equivalent */
+  font-size: 16.3px;
+  /* 11px equivalent */
   font-weight: 700;
   margin-bottom: 14px;
 }
@@ -846,7 +853,8 @@ body.page-scene {
   background: transparent;
   border: none;
   padding: 0;
-  font-size: 11.9px; /* 8px equivalent */
+  font-size: 11.9px;
+  /* 8px equivalent */
   color: #3a4a44;
   margin-bottom: 10px;
 }
@@ -862,7 +870,8 @@ body.page-scene {
 
 .screen-ignyte-3 .subject .s-title,
 .screen-v2-ignyte-3 .subject .s-title {
-  font-size: 11.9px; /* 8px equivalent */
+  font-size: 11.9px;
+  /* 8px equivalent */
   color: #3a4a44;
   font-weight: 600;
   margin-bottom: 10px;
@@ -992,7 +1001,7 @@ body.page-scene {
 
 .screen-v2-ignyte-1 .opt.selected {
   border: 1.5px solid var(--green);
-  color: var(--green-dark);
+  color: var(--green);
   font-weight: 700;
 }
 
@@ -1220,9 +1229,9 @@ body.page-scene {
 .screen-v2-ignyte .main {
   left: 34px;
   top: 34px;
-  width: 62%;
+  width: 67%;
   height: calc(100% - 68px);
-  padding: 34px 38px;
+  padding: 100px 38px 34px;
 }
 
 .screen-v2-ignyte .brand {
@@ -1233,13 +1242,11 @@ body.page-scene {
 }
 
 .screen-v2-ignyte .logo {
-  width: 46px;
-  height: 46px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #7fe0b3, #2f8f6a 70%);
+  background: linear-gradient(159.59deg, #23CEA7 42.42%, #C0E421 89.93%);
   display: grid;
-  place-items: center;
-  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, .15), 0 4px 10px rgba(47, 143, 106, .35);
 }
 
 .screen-v2-ignyte .logo svg {
@@ -1249,23 +1256,25 @@ body.page-scene {
 
 .screen-v2-ignyte .brand h1 {
   font-size: 22px;
-  font-weight: 800;
-  letter-spacing: .18em;
+  font-weight: 100;
+  letter-spacing: 0;
   margin: 0;
   color: #111;
+  font-style: italic;
 }
 
 .screen-v2-ignyte .panel {
+  width: 78%;
   background: linear-gradient(180deg, #fbfdfb, #e7f1ea);
   border-radius: 14px;
-  padding: 30px 32px 36px;
+  padding: 40px 40px 40px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .9), inset 0 0 0 1px rgba(255, 255, 255, .6), 0 18px 40px -18px rgba(20, 60, 40, .35);
 }
 
 .screen-v2-ignyte .panel h2 {
   font-size: 30px;
-  font-weight: 800;
-  color: #2f8f6a;
+  font-weight: 400;
+  color: #139A7B;
   margin: 0 0 28px;
 }
 
@@ -1273,7 +1282,7 @@ body.page-scene {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 14px 0;
+  padding: 30px 0;
 }
 
 .screen-v2-ignyte .row+.row {
@@ -1343,16 +1352,16 @@ body.page-scene {
 }
 
 .screen-v2-ignyte .notes {
-  right: -20px;
+  right: 38px;
   top: 160px;
-  width: 48%;
+  width: 40%;
   padding: 26px 28px 28px;
 }
 
 .screen-v2-ignyte .notes h3 {
   color: #2f8f6a;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 24px;
+  font-weight: 400;
   margin: 0 0 18px;
 }
 
@@ -1399,15 +1408,15 @@ body.page-scene {
 
 .screen-v2-ignyte .process {
   left: 24%;
-  bottom: -46px;
+  bottom: 0;
   width: 70%;
   padding: 22px 26px 24px;
 }
 
 .screen-v2-ignyte .process h3 {
   color: #2f8f6a;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 400;
   margin: 0 0 16px;
 }
 
@@ -1425,7 +1434,7 @@ body.page-scene {
 
 .screen-v2-ignyte .track {
   position: relative;
-  height: 30px;
+  height: 70px;
   border-radius: 8px;
   background: linear-gradient(90deg, #f1f5f2, #e3ece5);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
@@ -1438,7 +1447,7 @@ body.page-scene {
   top: 0;
   bottom: 0;
   background: linear-gradient(90deg, rgba(168, 230, 196, .2), #2f8f6a 70%, #256b50);
-  border-radius: 8px;
+  border-radius: 0;
   --w: 72%;
   width: 0;
   animation: fillBar 2.6s ease-out forwards;
@@ -1549,8 +1558,8 @@ body.page-scene {
 
 .screen-researcher .tag-researcher {
   position: absolute;
-  top: 12px;
-  left: 28px;
+  top: 70px;
+  left: 60px;
   z-index: 10;
 }
 
@@ -1633,7 +1642,6 @@ body.page-scene {
   border-radius: 10px;
   padding: 11px 13px;
   display: flex;
-  align-items: center;
   gap: 10px;
   min-height: 62px;
   position: relative;
@@ -1687,10 +1695,10 @@ body.page-scene {
 }
 
 .screen-researcher .badge {
-  position: absolute;
+  position: static;
   right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 32%;
+  transform: none;
   font-size: 10px;
   font-weight: 700;
   padding: 5px 11px;
@@ -2370,6 +2378,7 @@ body.page-scene {
 .screen-v2-ignyte-6 .col-right {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 14px;
   height: 100%;
 }
@@ -2537,7 +2546,7 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-6 .report-lbl {
-  font-size: 19px;
+  font-size: 24px;
   font-weight: 400;
   color: #5a6c62;
   margin-bottom: 20px;
@@ -2576,16 +2585,14 @@ body.page-scene {
 
 .screen-v2-ignyte-6 .st {
   padding: 0 14px;
+  text-align: center;
 }
 
 .screen-v2-ignyte-6 .st:first-child {
   padding-left: 2px;
-  border-right: 1px solid #cedad4;
 }
 
-.screen-v2-ignyte-6 .st:nth-child(2) {
-  border-right: 1px solid #cedad4;
-}
+
 
 .screen-v2-ignyte-6 .st-k {
   font-size: 11px;
@@ -2613,7 +2620,7 @@ body.page-scene {
 .screen-v2-ignyte-6 .st-foot {
   margin-top: 15px;
   padding-top: 14px;
-  border-top: 1px solid #cedad4;
+  border-top: 1px solid #0E6652;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2632,7 +2639,6 @@ body.page-scene {
 
 /* Candidates card */
 .screen-v2-ignyte-6 .card-cands {
-  flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -2655,7 +2661,6 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-6 .c-row {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -2696,11 +2701,11 @@ body.page-scene {
 /* Candidate card: renders 245 × 317px */
 .screen-ignyte-3 .candidate,
 .screen-v2-ignyte-3 .candidate {
-width: 458px;
-    height: 497px;
-    padding: 40px 40px 32px;
-    text-align: center;
-    position: relative;
+  width: 458px;
+  height: 497px;
+  padding: 40px 40px 32px;
+  text-align: center;
+  position: relative;
 }
 
 /* Shortlist: renders 122 × 128px */
@@ -2717,14 +2722,14 @@ width: 458px;
 /* Recruiter card: renders 222 × 117px */
 .screen-ignyte-3 .recruiter-card,
 .screen-v2-ignyte-3 .recruiter-card {
-    margin-top: -129px;
-    width: 330px;
-    height: 174px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 24px 28px 32px;
-    position: absolute;
-    left: 100px;
+  margin-top: -129px;
+  width: 330px;
+  height: 174px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 24px 28px 32px;
+  position: absolute;
+  left: 100px;
 }
 
 /* Message: renders 169 × 141px */

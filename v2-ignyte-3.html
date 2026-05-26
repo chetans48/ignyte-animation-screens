@@ -21,6 +21,188 @@
       left: 0;
       transform-origin: top left;
     }
+
+    .sk {
+      background: linear-gradient(90deg, #dfe5e3 0%, #eef2f0 50%, #dfe5e3 100%) !important;
+      background-size: 200% 100% !important;
+      animation: shimmer 1.5s infinite linear !important;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
+    /* Fix Tag Positioning */
+    .tag-researcher {
+      position: absolute;
+      top: 24px;
+      /* Align just above the white box */
+      left: 50px;
+      /* Align with the left edge of the white box */
+      background: #0f8e72;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    .tag-researcher::before {
+      content: "";
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* Fix Bar Fill Animation & Color */
+    .screen-researcher .bar-fill {
+      background: linear-gradient(90deg, #1aa480, #36d29b) !important;
+      /* Gradient green */
+      border-radius: 6px !important;
+      animation: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 26px !important;
+      font-weight: 700 !important;
+      padding: 0 !important;
+      transition: width 0.05s linear;
+      white-space: nowrap;
+    }
+
+    /* Avatar Overlaps - REMOVED to keep avatars inside containers */
+    .screen-researcher .avatar {
+      /* Removed negative margins */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .screen-researcher .s-avatar {
+      /* Removed negative margins */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Fix Pills Colors */
+    .screen-researcher .pill.high {
+      background: linear-gradient(90deg, #0d8368, #119f7e) !important;
+    }
+
+    /* Gradient green */
+    .screen-researcher .pill.mid {
+      background: #abc93c !important;
+      color: white !important;
+    }
+
+    .screen-researcher .pill.review {
+      background: #ef3c69 !important;
+    }
+
+    /* Mapped Competencies Alignment & Styles */
+    .screen-researcher .cell {
+      border: 1.5px solid rgba(255, 255, 255, 0.9) !important;
+      background: rgba(255, 255, 255, 0.6) !important;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7), 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      padding: 12px 14px !important;
+      /* Restore vertical centering */
+    }
+
+    .screen-researcher .cell .sk {
+      height: 10px !important;
+      border-radius: 5px !important;
+      margin: 0 !important;
+    }
+
+    .screen-researcher .sk-stack {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px !important;
+    }
+
+    .screen-researcher .sk-stack .sk:nth-child(1) {
+      width: 35px !important;
+    }
+
+    .screen-researcher .sk-stack .sk:nth-child(2) {
+      width: 85% !important;
+    }
+
+    .screen-researcher .check {
+      background: linear-gradient(135deg, #0dc898 0%, #b8f029 100%) !important;
+      border: none !important;
+      width: 22px !important;
+      height: 22px !important;
+      flex: 0 0 22px !important;
+    }
+
+    .screen-researcher .check svg {
+      width: 12px !important;
+      height: 12px !important;
+    }
+
+    /* Perfect fit badge alignment */
+    .screen-researcher .badge:not(.pink) {
+      background: #19d6aa !important;
+      color: #0c3327 !important;
+      font-weight: 600 !important;
+      font-size: 8px !important;
+      /* Smaller text */
+      padding: 4px 8px !important;
+      /* Tighter padding */
+      border-radius: 4px !important;
+    }
+
+    .screen-researcher .badge.pink {
+      font-size: 8px !important;
+      padding: 4px 8px !important;
+      border-radius: 4px !important;
+    }
+
+    /* Filterable Fit Scores Layout Fixes */
+    .screen-researcher .score-row {
+      display: block !important;
+      position: relative !important;
+      padding-left: 82px !important;
+      min-height: 80px !important;
+      margin-bottom: 24px !important;
+    }
+
+    .screen-researcher .score-row .s-avatar {
+      position: absolute !important;
+      left: 0 !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      margin: 0 !important;
+    }
+
+    .screen-researcher .score-row .fi {
+      position: absolute !important;
+      top: 0 !important;
+      right: 0 !important;
+    }
+
+    .screen-researcher .score-row .score-mid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      /* More space between pills and bar */
+      width: 100% !important;
+    }
   </style>
 </head>
 
@@ -29,8 +211,17 @@
     <div class="scene screen-researcher">
       <div class="canvas">
 
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <linearGradient id="gradFlag" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#0dc898;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#b8f029;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+        </svg>
+
         <!-- ── Researcher label ── -->
-        <span class="tag green tag-researcher">The Researcher</span>
+        <span class="tag tag-researcher">The Researcher</span>
 
         <!-- ══════════════════════════════════════
          LEFT PANEL
@@ -47,85 +238,130 @@
 
           <!-- row 1 -->
           <div class="row">
-            <div class="avatar a1"></div>
+            <div class="avatar a1"
+              style="background-image: url('images/Candidates 01.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="cell">
-              <div class="check">
-                <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <polyline points="2 7 5.5 10.5 12 3.5" />
-                </svg>
+              <div style="display: flex;flex-direction: row;align-items: center;gap: 20px;">
+                <div class="check">
+                  <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="2 7 5.5 10.5 12 3.5" />
+                  </svg>
+                </div>
+                <div class="sk-stack">
+                  <div class="sk" style="width: 50px !important;"></div>
+                </div>
               </div>
               <div class="sk-stack">
-                <div class="sk"></div>
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
             </div>
             <div class="cell">
-              <div class="flag">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
-                </svg>
+              <div
+                style="display: flex;flex-direction: row;align-items: center;gap: 20px;justify-content: space-between !important;">
+                <div class="flag">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#gradFlag)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
+                  </svg>
+                </div>
+
+                <span class="badge">Perfect Fit</span>
               </div>
               <div class="sk-stack">
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
-              <span class="badge">Perfect Fit</span>
             </div>
           </div>
 
           <!-- row 2 -->
           <div class="row">
-            <div class="avatar a2"></div>
+            <div class="avatar a2"
+              style="background-image: url('images/Candidates 02.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="cell">
-              <div class="check">
-                <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <polyline points="2 7 5.5 10.5 12 3.5" />
-                </svg>
+              <div style="display: flex;flex-direction: row;align-items: center;gap: 20px;">
+                <div class="check">
+                  <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="2 7 5.5 10.5 12 3.5" />
+                  </svg>
+                </div>
+                <div class="sk-stack">
+                  <div class="sk" style="width: 50px !important;"></div>
+                </div>
               </div>
               <div class="sk-stack">
-                <div class="sk"></div>
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
             </div>
             <div class="cell">
-              <div class="flag">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
-                </svg>
+              <div
+                style="display: flex;flex-direction: row;align-items: center;gap: 20px;justify-content: space-between !important;">
+                <div class="flag">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#gradFlag)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
+                  </svg>
+                </div>
+
+                <span class="badge">Perfect Fit</span>
               </div>
               <div class="sk-stack">
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
-              <span class="badge">Perfect Fit</span>
             </div>
           </div>
 
           <!-- row 3 -->
           <div class="row">
-            <div class="avatar a3"></div>
+            <div class="avatar a3"
+              style="background-image: url('images/Candidates 03.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="cell">
-              <div class="check">
-                <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <polyline points="2 7 5.5 10.5 12 3.5" />
-                </svg>
+              <div style="display: flex;flex-direction: row;align-items: center;gap: 20px;">
+                <div class="check">
+                  <svg viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="2 7 5.5 10.5 12 3.5" />
+                  </svg>
+                </div>
+                <div class="sk-stack">
+                  <div class="sk" style="width: 50px !important;"></div>
+                </div>
               </div>
               <div class="sk-stack">
-                <div class="sk"></div>
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
             </div>
             <div class="cell">
-              <div class="flag">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
-                </svg>
+              <div
+                style="display: flex;flex-direction: row;align-items: center;gap: 20px;justify-content: space-between !important;">
+                <div class="flag">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#gradFlag)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" />
+                  </svg>
+                </div>
+
+                <span class="badge pink">Perfect Fit</span>
               </div>
               <div class="sk-stack">
+                <div class="sk" style="height: 20px !important;border-radius: 30px !important;width: 100% !important;">
+                </div>
                 <div class="sk"></div>
               </div>
-              <span class="badge pink">Perfect Fit</span>
             </div>
           </div>
         </section>
@@ -137,7 +373,9 @@
           <h3>Filterable fit scores</h3>
 
           <div class="score-row">
-            <div class="s-avatar a4"></div>
+            <div class="s-avatar a4"
+              style="background-image: url('images/Candidates 01.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="score-mid">
               <div class="pills">
                 <span class="pill high">High</span>
@@ -145,19 +383,21 @@
                 <span class="pill review">Review</span>
               </div>
               <div class="bar">
-                <div class="bar-fill" data-w="91" style="--w:91%">91%</div>
+                <div class="bar-fill" data-w="91" style="width: 0%;">0%</div>
               </div>
             </div>
             <div class="fi">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB998" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
               </svg>
             </div>
           </div>
 
           <div class="score-row">
-            <div class="s-avatar a5"></div>
+            <div class="s-avatar a5"
+              style="background-image: url('images/Candidates 02.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="score-mid">
               <div class="pills">
                 <span class="pill high">High</span>
@@ -165,19 +405,21 @@
                 <span class="pill review">Review</span>
               </div>
               <div class="bar">
-                <div class="bar-fill" data-w="51" style="--w:51%">51%</div>
+                <div class="bar-fill" data-w="51" style="width: 0%;">0%</div>
               </div>
             </div>
             <div class="fi">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB998" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
               </svg>
             </div>
           </div>
 
           <div class="score-row">
-            <div class="s-avatar a6"></div>
+            <div class="s-avatar a6"
+              style="background-image: url('images/Candidates 03.png'); background-size: cover; background-position: center;">
+            </div>
             <div class="score-mid">
               <div class="pills">
                 <span class="pill high">High</span>
@@ -185,13 +427,13 @@
                 <span class="pill review">Review</span>
               </div>
               <div class="bar">
-                <div class="bar-fill" data-w="21" style="--w:41%">21%</div>
+                <div class="bar-fill" data-w="21" style="width: 0%;">0%</div>
               </div>
             </div>
             <div class="fi">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4.25 5.61C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39A1 1 0 0 0 18.95 4H5.04a1 1 0 0 0-.79 1.61z" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0DB998" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
               </svg>
             </div>
           </div>
@@ -240,6 +482,40 @@
       }
       resize();
       window.addEventListener('resize', resize);
+
+      // Animate bars
+      var bars = document.querySelectorAll('.bar-fill');
+
+      function animateBars() {
+        bars.forEach(function (bar) {
+          var target = parseInt(bar.getAttribute('data-w'), 10);
+          bar.style.transition = 'none'; // reset transition for snap back
+          bar.style.width = '0%';
+          bar.textContent = '0%';
+
+          var current = 0;
+          var duration = 1500; // 1.5s total
+
+          setTimeout(function () {
+            bar.style.transition = 'width 0.1s linear';
+            var interval = setInterval(function () {
+              current += target / (duration / 50); // 50ms interval
+              if (current >= target) {
+                current = target;
+                clearInterval(interval);
+              }
+              bar.style.width = current + '%';
+              bar.textContent = Math.floor(current) + '%';
+            }, 50);
+          }, 100);
+        });
+      }
+
+      // Initial run
+      setTimeout(animateBars, 200);
+
+      // Loop every 4 seconds
+      setInterval(animateBars, 4000);
     })();
   </script>
 </body>

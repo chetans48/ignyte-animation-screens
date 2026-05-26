@@ -44,10 +44,11 @@
         </div>
 
         <div class="jd-card">
-          <div class="jd-head">
-              <img src="images/logo-2.png" alt="Ignyte Logo" />
+          <div class="jd-head" style="display: flex; align-items: center; gap: 4px;">
+              <img src="images/logo-2.png" alt="Ignyte Logo" style="height: 12px; width: auto;" />
+              <span style="font-weight: 800; font-size: 10px; color: #1a1a1a; letter-spacing: 0.5px;">IGNYTE</span>
           </div>
-          <div class="jd-title">VP of Product Strategy</div>
+          <div class="jd-title" id="jd-title">VP of Product Strategy</div>
           <div class="skel-line" style="width:55%"></div>
           <div class="divider"></div>
 
@@ -61,13 +62,25 @@
 
           <div class="jd-section">
             <h4>Key Responsibilities</h4>
-            <div class="skel-line" style="width:85%; margin-bottom:4px;"></div>
-            <div class="skel-line" style="width:75%; margin-bottom:4px;"></div>
-            <div class="skel-line" style="width:60%; margin-bottom:4px;"></div>
-            <div class="skel-line" style="width:45%;"></div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <div style="width:3px; height:3px; border-radius:50%; background:#c7dbd3; flex-shrink:0;"></div>
+              <div class="skel-line" style="width:85%; margin-bottom:0;"></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <div style="width:3px; height:3px; border-radius:50%; background:#c7dbd3; flex-shrink:0;"></div>
+              <div class="skel-line" style="width:75%; margin-bottom:0;"></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+              <div style="width:3px; height:3px; border-radius:50%; background:#c7dbd3; flex-shrink:0;"></div>
+              <div class="skel-line" style="width:60%; margin-bottom:0;"></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <div style="width:3px; height:3px; border-radius:50%; background:#c7dbd3; flex-shrink:0;"></div>
+              <div class="skel-line" style="width:45%; margin-bottom:0;"></div>
+            </div>
           </div>
 
-          <button class="edit-btn">Edit JD</button>
+          <button class="edit-btn">Edit profile</button>
         </div>
       </div>
 
@@ -139,6 +152,41 @@ Outreach email</button>
       }
       resize();
       window.addEventListener('resize', resize);
+
+      // Animation logic
+      var options = document.querySelectorAll('.question-card .opt:not(.skeleton)');
+      var titleElem = document.getElementById('jd-title');
+      
+      var titles = [
+        "VP of Product Strategy",
+        "VP of Strategy & Operations",
+        "Chief Strategy Officer"
+      ];
+      
+      var currentIndex = 0;
+      
+      function cycleOptions() {
+        // Remove selected from current
+        options[currentIndex].classList.remove('selected');
+        
+        // Move to next
+        currentIndex = (currentIndex + 1) % options.length;
+        
+        // Add selected to next
+        options[currentIndex].classList.add('selected');
+        
+        // Change title with a small fade effect
+        titleElem.style.opacity = '0';
+        setTimeout(function() {
+          titleElem.textContent = titles[currentIndex];
+          titleElem.style.opacity = '1';
+        }, 300);
+      }
+      
+      // Add CSS transition for smooth title fading
+      titleElem.style.transition = 'opacity 0.3s ease';
+      
+      setInterval(cycleOptions, 3000);
     })();
   </script>
 </body>
