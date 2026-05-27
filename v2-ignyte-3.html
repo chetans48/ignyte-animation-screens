@@ -26,6 +26,29 @@
       background: linear-gradient(90deg, #dfe5e3 0%, #eef2f0 50%, #dfe5e3 100%) !important;
       background-size: 200% 100% !important;
       animation: shimmer 1.5s infinite linear !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .sk::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      height: 100% !important;
+      width: 50% !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%) !important;
+      animation: skGlowSweep 1.8s infinite linear !important;
+    }
+
+    @keyframes skGlowSweep {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(200%);
+      }
     }
 
     @keyframes shimmer {
