@@ -99,20 +99,44 @@
     @keyframes fillS { 0% { width: 0; } 70% { width: 68%; } 100% { width: 68%; } }
     @keyframes fillM { 0% { width: 0; } 70% { width: 55%; } 100% { width: 55%; } }
     @keyframes fillI { 0% { width: 0; } 70% { width: 35%; } 100% { width: 35%; } }
+    @keyframes progressReveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes progressGlow { 0% { transform: translateX(-100%); } 100% { transform: translateX(220%); } }
 
     .screen-v2-ignyte-6 .bf.s {
       background: #23CEA7 !important;
-      animation: fillS 3.5s ease-out infinite !important;
+      animation: none !important;
+      width: 68% !important;
+      transform: scaleX(0);
+      transform-origin: left center;
     }
 
     .screen-v2-ignyte-6 .bf.m {
       background: #23CEA7 !important;
-      animation: fillM 3.5s ease-out infinite !important;
+      animation: none !important;
+      width: 55% !important;
+      transform: scaleX(0);
+      transform-origin: left center;
     }
 
     .screen-v2-ignyte-6 .bf.i {
       background: #23CEA7 !important;
-      animation: fillI 3.5s ease-out infinite !important;
+      animation: none !important;
+      width: 35% !important;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .screen-v2-ignyte-6 .bf {
+      overflow: hidden;
+    }
+
+    .screen-v2-ignyte-6 .bf::after {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 45%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .55), rgba(255, 255, 255, 0));
+      transform: translateX(-100%);
     }
 
     .screen-v2-ignyte-6 .strat-p {
@@ -170,6 +194,62 @@
     /* Skeleton bars on the right */
     .screen-v2-ignyte-6 .col-right .sk {
       background: linear-gradient(90deg, #e1e9e5 0%, #edf2f0 50%, #e1e9e5 100%) !important;
+    }
+
+    .screen-v2-ignyte-6 .card-report img {
+      display: block !important;
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    .screen-v2-ignyte-6 .card-intro,
+    .screen-v2-ignyte-6 .card-search,
+    .screen-v2-ignyte-6 .card-stats,
+    .screen-v2-ignyte-6 .card-cands,
+    .screen-v2-ignyte-6 .card-report {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .card-intro {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out forwards, gentleFloat 4.1s ease-in-out .55s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .card-search {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.3s ease-in-out 1s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .card-stats {
+      --float-y: -3px;
+      animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4s ease-in-out 1.45s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .card-cands {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out 1.35s forwards, gentleFloat 4.4s ease-in-out 1.9s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .card-report {
+      --float-y: -5px;
+      animation: softFadeIn .55s ease-out 1.8s forwards, gentleFloat 4.7s ease-in-out 2.35s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .bf.s {
+      animation: progressReveal 1.4s ease-out 1s forwards !important;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .bf.m {
+      animation: progressReveal 1.4s ease-out 1.15s forwards !important;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .bf.i {
+      animation: progressReveal 1.4s ease-out 1.3s forwards !important;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .bf::after {
+      animation: progressGlow 1.8s linear 1.45s infinite;
     }
   </style>
 </head>
@@ -338,9 +418,24 @@
       window.addEventListener('resize', resize);
 
       // Number counter animation logic
+      var loopDuration = 120000;
+      var loopVisibleTime = 7350;
+      var sceneStart = Date.now();
+      var loopTimer;
+      var counterTimer;
+      var counters = document.querySelectorAll('.num-counter');
+
       function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+      
+      function resetCounters() {
+        clearTimeout(counterTimer);
+        counters.forEach(function (counter) {
+          var pad = parseInt(counter.getAttribute('data-pad'), 10) || 0;
+          counter.textContent = pad > 0 ? '0'.padStart(pad, '0') : '0';
+        });
+      }
+
       function runCounters() {
-        var counters = document.querySelectorAll('.num-counter');
         counters.forEach(function (counter) {
           var target = parseInt(counter.getAttribute('data-val'), 10);
           var pad = parseInt(counter.getAttribute('data-pad'), 10) || 0;
@@ -373,9 +468,25 @@
         });
       }
 
-      // Initial run and then loop every 3.5 seconds
-      runCounters();
-      setInterval(runCounters, 3500);
+      function replaySequence() {
+        var elapsed = Date.now() - sceneStart;
+        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
+
+        resetCounters();
+        scene.classList.remove('animate-loop');
+        void scene.offsetWidth;
+        scene.classList.add('animate-loop');
+        counterTimer = setTimeout(runCounters, 1000);
+
+        loopTimer = setTimeout(replaySequence, loopVisibleTime);
+      }
+
+      replaySequence();
+      setTimeout(function () {
+        clearTimeout(loopTimer);
+        clearTimeout(counterTimer);
+        scene.classList.add('animate-loop');
+      }, loopDuration);
     })();
   </script>
 </body>

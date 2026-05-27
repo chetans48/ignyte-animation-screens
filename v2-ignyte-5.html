@@ -22,9 +22,8 @@
       transform-origin: top left;
     }
 
-    /* Override the fillBar animation to loop continuously and run more slowly */
     .screen-v2-ignyte .fill {
-      animation: fillBar 4.5s ease-out infinite !important;
+      animation: none !important;
     }
 
     @keyframes shimmer {
@@ -42,6 +41,142 @@
       background: linear-gradient(90deg, #e3ece5 25%, #f1f5f2 50%, #e3ece5 75%) !important;
       background-size: 200% 100% !important;
       animation: shimmer 3s infinite linear !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .screen-v2-ignyte .sk::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      height: 100% !important;
+      width: 50% !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%) !important;
+      animation: skGlowSweep 1.8s infinite linear !important;
+    }
+
+    @keyframes skGlowSweep {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(200%);
+      }
+    }
+
+    @keyframes starPop {
+      0% {
+        opacity: 0;
+        transform: scale(.45) rotate(-12deg);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1.16) rotate(4deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    .screen-v2-ignyte .panel,
+    .screen-v2-ignyte .card.notes,
+    .screen-v2-ignyte .card.process {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    .screen-v2-ignyte.animate-loop .panel {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out forwards, gentleFloat 4.2s ease-in-out .55s infinite;
+    }
+
+    .screen-v2-ignyte.animate-loop .card.notes {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.4s ease-in-out 1s infinite;
+    }
+
+    .screen-v2-ignyte.animate-loop .card.process {
+      --float-y: -5px;
+      animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4.6s ease-in-out 1.45s infinite;
+    }
+
+    .screen-v2-ignyte.animate-loop .fill {
+      animation: fillBar 2.6s ease-out 1.1s forwards !important;
+    }
+
+    .screen-v2-ignyte .star {
+      opacity: 0;
+      transform-origin: center;
+      will-change: opacity, transform;
+    }
+
+    .screen-v2-ignyte.animate-loop .star {
+      animation: starPop .28s ease-out forwards;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(1) .star:nth-child(1) {
+      animation-delay: 1.1s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(1) .star:nth-child(2) {
+      animation-delay: 1.22s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(1) .star:nth-child(3) {
+      animation-delay: 1.34s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(1) .star:nth-child(4) {
+      animation-delay: 1.46s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(1) .star:nth-child(5) {
+      animation-delay: 1.58s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(2) .star:nth-child(1) {
+      animation-delay: 1.75s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(2) .star:nth-child(2) {
+      animation-delay: 1.87s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(2) .star:nth-child(3) {
+      animation-delay: 1.99s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(2) .star:nth-child(4) {
+      animation-delay: 2.11s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(2) .star:nth-child(5) {
+      animation-delay: 2.23s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(3) .star:nth-child(1) {
+      animation-delay: 2.4s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(3) .star:nth-child(2) {
+      animation-delay: 2.52s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(3) .star:nth-child(3) {
+      animation-delay: 2.64s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(3) .star:nth-child(4) {
+      animation-delay: 2.76s;
+    }
+
+    .screen-v2-ignyte.animate-loop .row:nth-of-type(3) .star:nth-child(5) {
+      animation-delay: 2.88s;
     }
   </style>
 </head>
@@ -230,6 +365,28 @@
       }
       resize();
       window.addEventListener('resize', resize);
+
+      var loopDuration = 120000;
+      var loopVisibleTime = 8700;
+      var sceneStart = Date.now();
+      var loopTimer;
+
+      function replaySequence() {
+        var elapsed = Date.now() - sceneStart;
+        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
+
+        scene.classList.remove('animate-loop');
+        void scene.offsetWidth;
+        scene.classList.add('animate-loop');
+
+        loopTimer = setTimeout(replaySequence, loopVisibleTime);
+      }
+
+      replaySequence();
+      setTimeout(function () {
+        clearTimeout(loopTimer);
+        scene.classList.add('animate-loop');
+      }, loopDuration);
     })();
   </script>
 </body>
