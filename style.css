@@ -974,6 +974,10 @@ body.page-scene {
   box-shadow: 0 1px 0 rgba(0, 0, 0, .02);
   background: linear-gradient(277deg, rgba(255, 255, 255, 0.95) 0%, rgb(163 208 198 / 18%) 54%, rgb(202 233 226 / 34%) 78%);
   opacity: 0;
+  will-change: opacity, transform;
+}
+
+.screen-v2-ignyte-1.animate-loop .prompt-bubble {
   animation: softFadeIn .55s ease-out forwards, gentleFloat 3.8s ease-in-out .55s infinite;
 }
 
@@ -1007,6 +1011,10 @@ body.page-scene {
   width: 212px;
   height: 154px;
   opacity: 0;
+  will-change: opacity, transform;
+}
+
+.screen-v2-ignyte-1.animate-loop .question-card {
   animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.2s ease-in-out 1s infinite;
 }
 
@@ -1067,6 +1075,10 @@ body.page-scene {
   padding: 14px;
   box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .18);
   opacity: 0;
+  will-change: opacity, transform;
+}
+
+.screen-v2-ignyte-1.animate-loop .jd-card {
   animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4.6s ease-in-out 1.45s infinite;
 }
 

@@ -203,6 +203,69 @@
       /* More space between pills and bar */
       width: 100% !important;
     }
+
+    .screen-researcher .glass.researcher,
+    .screen-researcher .glass.scores,
+    .screen-researcher .glass.operator,
+    .screen-researcher .glass.reasoning {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    .screen-researcher.animate-loop .glass.researcher {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out forwards, gentleFloat 4.4s ease-in-out .55s infinite;
+    }
+
+    .screen-researcher.animate-loop .glass.scores {
+      --float-y: -3px;
+      animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4s ease-in-out 1s infinite;
+    }
+
+    .screen-researcher.animate-loop .glass.operator {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4.2s ease-in-out 1.45s infinite;
+    }
+
+    .screen-researcher.animate-loop .glass.reasoning {
+      --float-y: -5px;
+      animation: softFadeIn .55s ease-out 1.35s forwards, gentleFloat 4.6s ease-in-out 1.9s infinite;
+    }
+
+    .screen-researcher .researcher>.row,
+    .screen-researcher .scores>.score-row {
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    .screen-researcher.animate-loop .researcher>.row,
+    .screen-researcher.animate-loop .scores>.score-row {
+      animation: softFadeIn .45s ease-out forwards;
+    }
+
+    .screen-researcher.animate-loop .researcher>.row:nth-of-type(3) {
+      animation-delay: 1.9s;
+    }
+
+    .screen-researcher.animate-loop .scores>.score-row:nth-of-type(1) {
+      animation-delay: 2.4s;
+    }
+
+    .screen-researcher.animate-loop .researcher>.row:nth-of-type(4) {
+      animation-delay: 2.9s;
+    }
+
+    .screen-researcher.animate-loop .scores>.score-row:nth-of-type(2) {
+      animation-delay: 3.4s;
+    }
+
+    .screen-researcher.animate-loop .researcher>.row:nth-of-type(5) {
+      animation-delay: 3.9s;
+    }
+
+    .screen-researcher.animate-loop .scores>.score-row:nth-of-type(3) {
+      animation-delay: 4.4s;
+    }
   </style>
 </head>
 
@@ -485,37 +548,78 @@
 
       // Animate bars
       var bars = document.querySelectorAll('.bar-fill');
+      var loopDuration = 120000;
+      var loopVisibleTime = 11000;
+      var sceneStart = Date.now();
+      var loopTimer;
+      var barTimers = [];
 
-      function animateBars() {
+      function animateBar(bar) {
+        var target = parseInt(bar.getAttribute('data-w'), 10);
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        bar.textContent = '0%';
+
+        var current = 0;
+        var duration = 1500;
+
+        setTimeout(function () {
+          bar.style.transition = 'width 0.1s linear';
+          var interval = setInterval(function () {
+            current += target / (duration / 50);
+            if (current >= target) {
+              current = target;
+              clearInterval(interval);
+            }
+            bar.style.width = current + '%';
+            bar.textContent = Math.floor(current) + '%';
+          }, 50);
+        }, 100);
+      }
+
+      function resetBars() {
+        barTimers.forEach(function (timer) {
+          clearTimeout(timer);
+        });
+        barTimers = [];
+
         bars.forEach(function (bar) {
-          var target = parseInt(bar.getAttribute('data-w'), 10);
-          bar.style.transition = 'none'; // reset transition for snap back
+          bar.style.transition = 'none';
           bar.style.width = '0%';
           bar.textContent = '0%';
-
-          var current = 0;
-          var duration = 1500; // 1.5s total
-
-          setTimeout(function () {
-            bar.style.transition = 'width 0.1s linear';
-            var interval = setInterval(function () {
-              current += target / (duration / 50); // 50ms interval
-              if (current >= target) {
-                current = target;
-                clearInterval(interval);
-              }
-              bar.style.width = current + '%';
-              bar.textContent = Math.floor(current) + '%';
-            }, 50);
-          }, 100);
         });
       }
 
-      // Initial run
-      setTimeout(animateBars, 200);
+      function animateBarsInSequence() {
+        bars.forEach(function (bar, index) {
+          barTimers.push(setTimeout(function () {
+            animateBar(bar);
+          }, 2500 + (index * 1000)));
+        });
+      }
 
-      // Loop every 4 seconds
-      setInterval(animateBars, 4000);
+      function replaySequence() {
+        var elapsed = Date.now() - sceneStart;
+        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
+
+        resetBars();
+        scene.classList.remove('animate-loop');
+        void scene.offsetWidth;
+        scene.classList.add('animate-loop');
+        animateBarsInSequence();
+
+        loopTimer = setTimeout(replaySequence, loopVisibleTime);
+      }
+
+      resetBars();
+      replaySequence();
+      setTimeout(function () {
+        clearTimeout(loopTimer);
+        barTimers.forEach(function (timer) {
+          clearTimeout(timer);
+        });
+        scene.classList.add('animate-loop');
+      }, loopDuration);
     })();
   </script>
 </body>

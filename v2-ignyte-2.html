@@ -135,6 +135,8 @@
       background: linear-gradient(90deg, #bec9c5 25%, #eef5f2 50%, #d2dfda 75%) !important;
       background-size: 200% 100% !important;
       animation: shimmer 1.5s infinite linear !important;
+      position: relative !important;
+      overflow: hidden !important;
     }
 
     .screen-ignyte-2 .pill {
@@ -145,6 +147,8 @@
       animation: shimmer 1.5s infinite linear !important;
       flex: 1 !important;
       min-width: 0 !important;
+      position: relative !important;
+      overflow: hidden !important;
     }
 
     .screen-ignyte-2 .pill-row {
@@ -152,6 +156,18 @@
       gap: 4px !important;
       flex-wrap: wrap !important;
       margin-top: 5px !important;
+    }
+
+    .screen-ignyte-2 .skel::after,
+    .screen-ignyte-2 .pill::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      height: 100% !important;
+      width: 50% !important;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%) !important;
+      animation: progressShimmer 1.8s infinite linear !important;
     }
 
     .screen-ignyte-2 .reco li {
@@ -486,6 +502,55 @@
       flex-direction: column !important;
       gap: 3px !important;
     }
+
+    .screen-ignyte-2 .card-main,
+    .screen-ignyte-2 .evaluating-candidates-card,
+    .screen-ignyte-2 .review-card,
+    .screen-ignyte-2 .operator-card {
+      opacity: 0;
+      will-change: opacity, transform !important;
+    }
+
+    .screen-ignyte-2.animate-loop .card-main {
+      --float-y: -3px;
+      animation: softFadeIn .55s ease-out forwards, gentleFloat 3.8s ease-in-out .55s infinite !important;
+    }
+
+    .screen-ignyte-2.animate-loop .evaluating-candidates-card {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.2s ease-in-out 1s infinite !important;
+    }
+
+    .screen-ignyte-2.animate-loop .review-card {
+      --float-y: -3px;
+      animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4s ease-in-out 1.45s infinite !important;
+    }
+
+    .screen-ignyte-2.animate-loop .operator-card {
+      --float-y: -5px;
+      animation: softFadeIn .55s ease-out 1.35s forwards, gentleFloat 4.6s ease-in-out 1.9s infinite !important;
+    }
+
+    .screen-ignyte-2 .evaluating-candidates-card .row {
+      opacity: 0;
+      will-change: opacity !important;
+    }
+
+    .screen-ignyte-2.animate-loop .evaluating-candidates-card .row {
+      animation: softFadeIn .45s ease-out forwards !important;
+    }
+
+    .screen-ignyte-2.animate-loop .evaluating-candidates-card .row:nth-of-type(1) {
+      animation-delay: 2.4s !important;
+    }
+
+    .screen-ignyte-2.animate-loop .evaluating-candidates-card .row:nth-of-type(2) {
+      animation-delay: 2.9s !important;
+    }
+
+    .screen-ignyte-2.animate-loop .evaluating-candidates-card .row:nth-of-type(3) {
+      animation-delay: 3.4s !important;
+    }
   </style>
 </head>
 
@@ -654,6 +719,28 @@
       }
       resize();
       window.addEventListener('resize', resize);
+
+      var loopDuration = 120000;
+      var loopVisibleTime = 8850;
+      var stageStart = Date.now();
+      var loopTimer;
+
+      function replayCards() {
+        var elapsed = Date.now() - stageStart;
+        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
+
+        stage.classList.remove('animate-loop');
+        void stage.offsetWidth;
+        stage.classList.add('animate-loop');
+
+        loopTimer = setTimeout(replayCards, loopVisibleTime);
+      }
+
+      replayCards();
+      setTimeout(function() {
+        clearTimeout(loopTimer);
+        stage.classList.add('animate-loop');
+      }, loopDuration);
     })();
 
     // Premium loop-based counter animation for "15+"
