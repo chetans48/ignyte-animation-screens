@@ -158,6 +158,28 @@ body.page-scene {
   }
 }
 
+@keyframes softFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes gentleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(var(--float-y, -4px));
+  }
+}
+
 /* ═══════════════════════════════════════════
    SCREEN: screen-ignyte-2
    Search Consultant / Operator  — native small-pixel layout (no canvas scale)
@@ -941,6 +963,7 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-1 .prompt-bubble {
+  --float-y: -3px;
   border: 1px solid #cfe6db;
   background: #fff;
   border-radius: 4px;
@@ -950,6 +973,8 @@ body.page-scene {
   line-height: 1.3;
   box-shadow: 0 1px 0 rgba(0, 0, 0, .02);
   background: linear-gradient(277deg, rgba(255, 255, 255, 0.95) 0%, rgb(163 208 198 / 18%) 54%, rgb(202 233 226 / 34%) 78%);
+  opacity: 0;
+  animation: softFadeIn .55s ease-out forwards, gentleFloat 3.8s ease-in-out .55s infinite;
 }
 
 .screen-v2-ignyte-1 .tag {
@@ -973,6 +998,7 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-1 .question-card {
+  --float-y: -4px;
   background: rgba(255, 255, 255, .55);
   backdrop-filter: blur(6px);
   border: 1px solid #d5e7de;
@@ -980,6 +1006,8 @@ body.page-scene {
   padding: 5px;
   width: 212px;
   height: 154px;
+  opacity: 0;
+  animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.2s ease-in-out 1s infinite;
 }
 
 .screen-v2-ignyte-1 .q-title {
@@ -1028,6 +1056,7 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-1 .jd-card {
+  --float-y: -5px;
   position: absolute;
   right: -96px;
   top: -60px;
@@ -1037,6 +1066,8 @@ body.page-scene {
   border-radius: 8px;
   padding: 14px;
   box-shadow: 0 18px 40px -20px rgba(0, 0, 0, .18);
+  opacity: 0;
+  animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4.6s ease-in-out 1.45s infinite;
 }
 
 .screen-v2-ignyte-1 .jd-head {
