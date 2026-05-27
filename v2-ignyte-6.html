@@ -181,6 +181,8 @@
       border-radius: 8px !important;
       padding: 10px 14px !important;
       box-shadow: none !important;
+      opacity: 0;
+      will-change: opacity;
     }
 
     .screen-v2-ignyte-6 .c-av {
@@ -234,6 +236,22 @@
     .screen-v2-ignyte-6.animate-loop .card-report {
       --float-y: -5px;
       animation: softFadeIn .55s ease-out 1.8s forwards, gentleFloat 4.7s ease-in-out 2.35s infinite;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .c-row {
+      animation: softFadeIn .45s ease-out forwards;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .c-row:nth-child(1) {
+      animation-delay: 1.95s;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .c-row:nth-child(2) {
+      animation-delay: 2.35s;
+    }
+
+    .screen-v2-ignyte-6.animate-loop .c-row:nth-child(3) {
+      animation-delay: 2.75s;
     }
 
     .screen-v2-ignyte-6.animate-loop .bf.s {

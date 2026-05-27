@@ -28,7 +28,7 @@
       stroke-dashoffset: 132;
       transform-box: fill-box;
       transform-origin: center;
-      animation: drawRing 2.4s ease-in-out infinite;
+      animation: drawRing 3.6s ease-in-out infinite;
     }
 
     .step:nth-of-type(2) .ring {
