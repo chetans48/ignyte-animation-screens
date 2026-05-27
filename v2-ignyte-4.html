@@ -27,7 +27,7 @@
     .screen-ignyte-3 {
       font-family: var(--font-main), 'Inter', 'Open Sans', sans-serif !important;
       background-image: url('images/bg-card.png') !important;
-      background-size: cover !important;
+      background-size: 100% 100% !important;
       position: relative !important;
       width: 460px !important;
       height: 400px !important;
@@ -153,9 +153,9 @@
     }
 
     .screen-ignyte-3 .score {
-      background: #009f7a !important;
+      background: #eef5f2 !important;
       /* Teal */
-      color: #ffffff !important;
+      color: #5a6b65 !important;
       font-weight: 700 !important;
       font-size: 6px !important;
       padding: 2px 4px !important;
@@ -165,9 +165,19 @@
       line-height: 1 !important;
     }
 
+    .screen-ignyte-3 .sl-row.active .score {
+      background: #009f7a !important;
+      color: #ffffff !important;
+    }
+
     .screen-ignyte-3 .sl-row.alt .score {
       background: #eef5f2 !important;
       color: #5a6b65 !important;
+    }
+
+    .screen-ignyte-3 .sl-row.alt.active .score {
+      background: #009f7a !important;
+      color: #ffffff !important;
     }
 
     /* ── 16 Candidates Shortlisted Card (Right) ── */
@@ -331,6 +341,34 @@
       background-size: 200% 100% !important;
       animation: shimmer 1.5s infinite linear !important;
     }
+
+    .screen-ignyte-3 .card.shortlisted,
+    .screen-ignyte-3 .card.shortlist,
+    .screen-ignyte-3 .card.candidate,
+    .screen-ignyte-3 .card.message {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    .screen-ignyte-3.animate-loop .card.shortlisted {
+      --float-y: -3px;
+      animation: softFadeIn .55s ease-out forwards, gentleFloat 3.8s ease-in-out .55s infinite;
+    }
+
+    .screen-ignyte-3.animate-loop .card.shortlist {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .45s forwards, gentleFloat 4.2s ease-in-out 1s infinite;
+    }
+
+    .screen-ignyte-3.animate-loop .card.candidate {
+      --float-y: -4px;
+      animation: softFadeIn .55s ease-out .9s forwards, gentleFloat 4.4s ease-in-out 1.45s infinite;
+    }
+
+    .screen-ignyte-3.animate-loop .card.message {
+      --float-y: -5px;
+      animation: softFadeIn .55s ease-out 1.35s forwards, gentleFloat 4.6s ease-in-out 1.9s infinite;
+    }
   </style>
 </head>
 
@@ -364,7 +402,7 @@
         <!-- Candidate shortlist (left) -->
         <div class="card shortlist">
           <h4>Candidate shortlist</h4>
-          <div class="sl-row">
+          <div class="sl-row active">
             <div class="skel"></div>
             <span class="score">93</span>
           </div>
@@ -416,37 +454,149 @@
 
       // Loop-based smooth counter animation for numbers
       var counters = document.querySelectorAll('.score, .num');
-      counters.forEach(function(counter) {
-        var target = parseInt(counter.innerText, 10);
-        if (isNaN(target)) return;
-        
-        function playAnimation() {
-          var startTime = null;
-          var duration = 1500; // 1.5s smooth count up
-          
-          function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var progress = Math.min((timestamp - startTime) / duration, 1);
-            // easeOutExpo easing for a very smooth deceleration
-            var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            counter.innerText = Math.floor(ease * target);
-            
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            } else {
-              counter.innerText = target;
-            }
-          }
-          
-          // Reset to 0 briefly before counting up
-          counter.innerText = '0';
-          window.requestAnimationFrame(step);
+      var loopDuration = 120000;
+      var loopVisibleTime = 6900;
+      var stageStart = Date.now();
+      var loopTimer;
+      var counterTimers = [];
+      var counterData = [];
+      var profileTimers = [];
+      var shortlistRows = document.querySelectorAll('.screen-ignyte-3 .shortlist .sl-row');
+      var candidatePhoto = document.querySelector('.screen-ignyte-3 .photo');
+      var candidateName = document.querySelector('.screen-ignyte-3 .name');
+      var candidateRole = document.querySelector('.screen-ignyte-3 .role');
+      var messageTo = document.querySelector('.screen-ignyte-3 .message .to');
+      var messageTitle = document.querySelector('.screen-ignyte-3 .message .s-title');
+      var messageBody = document.querySelector('.screen-ignyte-3 .message .s-body');
+      var profiles = [
+        {
+          name: 'Rachael T',
+          role: 'AVP - Strategy',
+          image: 'images/Candidates 03.png',
+          subject: 'Subject: A conversation about your next chapter',
+          body: 'Rachael — Your work leading corporate strategy at Luxe Group, particularly the integration playbook across four acquisitions…'
+        },
+        {
+          name: 'Maya K',
+          role: 'VP - Product Strategy',
+          image: 'images/Candidates 01.png',
+          subject: 'Subject: Exploring a strategic leadership role',
+          body: 'Maya — Your experience building product strategy teams and aligning executive stakeholders stood out for this opportunity…'
+        },
+        {
+          name: 'Darren P',
+          role: 'Director - Growth Strategy',
+          image: 'images/Candidates 02.png',
+          subject: 'Subject: A role aligned with your growth work',
+          body: 'Darren — Your track record shaping market expansion plans and cross-functional growth initiatives maps closely to this search…'
         }
-        
-        playAnimation();
-        // Loop the animation continuously every 3.5 seconds to match shimmer loop feel
-        setInterval(playAnimation, 3500); 
+      ];
+
+      counters.forEach(function(counter) {
+        var target = parseInt(counter.textContent, 10);
+        if (isNaN(target)) return;
+        counterData.push({ counter: counter, target: target });
       });
+
+      function playCounter(counter, target) {
+        var startTime = null;
+        var duration = 1500;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          counter.textContent = Math.floor(ease * target);
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            counter.textContent = target;
+          }
+        }
+
+        counter.textContent = '0';
+        window.requestAnimationFrame(step);
+      }
+
+      function resetCounters() {
+        counterTimers.forEach(function(timer) {
+          clearTimeout(timer);
+        });
+        counterTimers = [];
+
+        counterData.forEach(function(item) {
+          item.counter.textContent = '0';
+        });
+      }
+
+      function setActiveProfile(index) {
+        var profile = profiles[index];
+        if (!profile) return;
+
+        shortlistRows.forEach(function(row, rowIndex) {
+          row.classList.toggle('active', rowIndex === index);
+        });
+
+        candidatePhoto.style.backgroundImage = "url('" + profile.image + "')";
+        candidateName.textContent = profile.name;
+        candidateRole.textContent = profile.role;
+        messageTo.textContent = 'To: ' + profile.name;
+        messageTitle.textContent = profile.subject;
+        messageBody.textContent = profile.body;
+      }
+
+      function resetProfileTimers() {
+        profileTimers.forEach(function(timer) {
+          clearTimeout(timer);
+        });
+        profileTimers = [];
+      }
+
+      function animateProfilesForSequence() {
+        setActiveProfile(0);
+        profileTimers.push(setTimeout(function() {
+          setActiveProfile(1);
+        }, 3300));
+        profileTimers.push(setTimeout(function() {
+          setActiveProfile(2);
+        }, 5000));
+      }
+
+      function animateCountersForSequence() {
+        counterData.forEach(function(item) {
+          counterTimers.push(setTimeout(function() {
+            playCounter(item.counter, item.target);
+          }, item.counter.classList.contains('num') ? 100 : 650));
+        });
+      }
+
+      function replayCards() {
+        var elapsed = Date.now() - stageStart;
+        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
+
+        resetCounters();
+        resetProfileTimers();
+        setActiveProfile(0);
+        stage.classList.remove('animate-loop');
+        void stage.offsetWidth;
+        stage.classList.add('animate-loop');
+        animateCountersForSequence();
+        animateProfilesForSequence();
+
+        loopTimer = setTimeout(replayCards, loopVisibleTime);
+      }
+
+      setActiveProfile(0);
+      replayCards();
+      setTimeout(function() {
+        clearTimeout(loopTimer);
+        counterTimers.forEach(function(timer) {
+          clearTimeout(timer);
+        });
+        resetProfileTimers();
+        stage.classList.add('animate-loop');
+      }, loopDuration);
     })();
   </script>
 </body>
