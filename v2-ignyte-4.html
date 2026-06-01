@@ -472,7 +472,7 @@
         {
           name: 'Rachael T',
           role: 'AVP - Strategy',
-          image: 'images/Candidates 03.png',
+          image: 'images/img02.png',
           subject: 'Subject: A conversation about your next chapter',
           body: 'Rachael — Your work leading corporate strategy at Luxe Group, particularly the integration playbook across four acquisitions…'
         },
@@ -538,7 +538,7 @@
           row.classList.toggle('active', rowIndex === index);
         });
 
-        candidatePhoto.style.backgroundImage = "url('" + profile.image + "')";
+        candidatePhoto.style.setProperty('background-image', "url('" + profile.image + "')", 'important');
         candidateName.textContent = profile.name;
         candidateRole.textContent = profile.role;
         messageTo.textContent = 'To: ' + profile.name;

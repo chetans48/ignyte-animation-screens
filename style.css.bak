@@ -1,5 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+/* ============================================================
+   IGNYTE — Unified Stylesheet
+   style.css
+   All screens scoped under unique wrapper classes to prevent
+   conflicts when combined into a single container.
+   ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ── Reset ── */
 *,
 *::before,
 *::after {
@@ -8,8 +16,9 @@
   padding: 0;
 }
 
+/* ── Design tokens ── */
 :root {
-
+  /* Primary greens */
   --green: #0DB998;
   --green-dark: #1f6f57;
   --green-deep: #0f3a2e;
@@ -17,20 +26,25 @@
   --green-mint: #e8f4ee;
   --green-lime: #C0E421;
 
+  /* Researcher greens */
   --green-forest: #1f6f4a;
   --green-medium: #2a8a5c;
   --green-bright: #3aa873;
 
+  /* Teal */
   --teal: #17a98b;
   --teal-2: #1fc4a6;
 
+  /* Lime alias */
   --lime: #c8e26a;
 
+  /* Pink / Red */
   --pink: #e0526b;
   --pink-dark: #c93a55;
   --pink-soft: #f7c9d2;
   --red: #ff3b3b;
 
+  /* Typography */
   --text: #1f2937;
   --text-dark: #1a2a22;
   --muted: #9aa3ab;
@@ -39,31 +53,37 @@
   --text-white: #fff;
   --text-black: #000;
 
+  /* Skeleton shimmer */
   --skel: #dfe5e3;
   --skel-2: #eef2f0;
 
+  /* Dark backgrounds */
   --bg-dark: #06100c;
   --bg-dark-2: #0a1612;
 
+  /* Cards */
   --card: #ffffff;
   --card-2: #eef6f1;
 
-  --font-main: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  /* Font stack */
+  --font-main: 'Inter', 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-open: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
+/* ── Base typography ── */
 html {
   font-family: var(--font-open);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Page wrappers (standalone viewing) ── */
 body.page-dark {
-
+  /* min-height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;
-
+  /* padding: 48px 24px; */
   background: #000;
   background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .07) 1px, transparent 0);
   background-size: 14px 14px;
@@ -85,6 +105,9 @@ body.page-scene {
   background: radial-gradient(1200px 700px at 50% 50%, #0d1c17 0%, #06100c 60%, #030806 100%);
 }
 
+/* ═══════════════════════════════════════════
+   ignyte webflow settings
+═══════════════════════════════════════════ */
 .ignyte1-scaler {
   width: 100%;
   max-width: 458px;
@@ -100,6 +123,9 @@ body.page-scene {
   transform-origin: top left;
 }
 
+/* ═══════════════════════════════════════════
+   SHARED ANIMATIONS
+═══════════════════════════════════════════ */
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -154,6 +180,10 @@ body.page-scene {
   }
 }
 
+/* ═══════════════════════════════════════════
+   SCREEN: screen-ignyte-2
+   Search Consultant / Operator  — native small-pixel layout (no canvas scale)
+═══════════════════════════════════════════ */
 .screen-ignyte-2 {
   position: relative;
   width: 458px;
@@ -167,6 +197,7 @@ body.page-scene {
   color: var(--text);
 }
 
+/* tag strip */
 .screen-ignyte-2 .tag {
   display: inline-block;
   font-weight: 700;
@@ -190,12 +221,14 @@ body.page-scene {
   color: #fff;
 }
 
+/* grid is the absolute-positioning parent */
 .screen-ignyte-2 .grid {
   position: relative;
   margin-top: 5px;
   height: 364px;
 }
 
+/* base card — all cards absolutely placed inside .grid */
 .screen-ignyte-2 .card {
   position: absolute;
   background: linear-gradient(180deg, #ffffff, #e8f3ed);
@@ -205,6 +238,7 @@ body.page-scene {
   box-shadow: 0 8px 20px -6px rgba(0, 0, 0, .22);
 }
 
+/* ── Main card: Target Companies + Recommendations ── */
 .screen-ignyte-2 .card-main {
   left: 0;
   top: 0;
@@ -288,6 +322,7 @@ body.page-scene {
   flex: 1;
 }
 
+/* ── Spec card: Draft Spec Structure — overlaps card-main bottom ── */
 .screen-ignyte-2 .spec-card {
   left: 0;
   top: 148px;
@@ -372,6 +407,7 @@ body.page-scene {
   color: #333;
 }
 
+/* ── Stat card: 15+ Industries ── */
 .screen-ignyte-2 .stat-card {
   right: 0;
   top: 0;
@@ -395,6 +431,7 @@ body.page-scene {
   line-height: 1.3;
 }
 
+/* ── Review card: Reviewing search ── */
 .screen-ignyte-2 .review-card {
   right: 0;
   top: 60px;
@@ -404,7 +441,11 @@ body.page-scene {
   flex-direction: column;
   gap: 8px;
   padding: 8px 10px;
-
+  /*background: 
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, #f7fdfb 0%, #d4eee1 100%);
+  background-size: 5px 5px, 5px 5px, 100% 100%;*/
   border: 1px solid #bce2cf;
   border-radius: 7px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -451,6 +492,7 @@ body.page-scene {
   animation: none;
 }
 
+/* ── SEARCH OPERATOR label ── */
 .screen-ignyte-2 .op-tag {
   position: absolute;
   right: 0;
@@ -458,6 +500,7 @@ body.page-scene {
   z-index: 2;
 }
 
+/* ── Operator card ── */
 .screen-ignyte-2 .operator-card {
   right: 0;
   top: 150px;
@@ -563,6 +606,11 @@ body.page-scene {
   background: linear-gradient(90deg, #ed3b6b 0%, rgba(237, 59, 107, 0) 100%);
 }
 
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-ignyte-3  +  screen-v2-ignyte-3
+   Recruiter
+═══════════════════════════════════════════ */
 .screen-ignyte-3,
 .screen-v2-ignyte-3 {
   position: relative;
@@ -633,7 +681,7 @@ body.page-scene {
 .screen-ignyte-3 .name,
 .screen-v2-ignyte-3 .name {
   font-size: 22.3px;
-
+  /* 15px * 1.485 */
   color: #3a4a44;
   font-weight: 500;
   margin-bottom: 6px;
@@ -642,7 +690,7 @@ body.page-scene {
 .screen-ignyte-3 .role,
 .screen-v2-ignyte-3 .role {
   font-size: 13.4px;
-
+  /* 9px equivalent */
   color: #1f362e;
   font-weight: 700;
   margin-bottom: 18px;
@@ -670,7 +718,7 @@ body.page-scene {
   color: #5a6b65;
   font-weight: 500;
   font-size: 13.4px;
-
+  /* 9px equivalent */
   margin-bottom: 18px;
 }
 
@@ -733,7 +781,7 @@ body.page-scene {
 .screen-ignyte-3 .shortlisted .lbl,
 .screen-v2-ignyte-3 .shortlisted .lbl {
   font-size: 13.4px;
-
+  /* 9px equivalent */
   color: #fff;
   line-height: 1.2;
 }
@@ -754,7 +802,7 @@ body.page-scene {
   background: #104233;
   color: #fff;
   font-size: 10.4px;
-
+  /* 7px equivalent */
   font-weight: 700;
   letter-spacing: .5px;
   padding: 5px 10px;
@@ -777,7 +825,7 @@ body.page-scene {
 .screen-ignyte-3 .rec-title,
 .screen-v2-ignyte-3 .rec-title {
   font-size: 13.4px;
-
+  /* 9px equivalent */
   color: #222;
   line-height: 1.4;
   margin-bottom: 18px;
@@ -817,7 +865,7 @@ body.page-scene {
 .screen-v2-ignyte-3 .message h3 {
   color: #118461;
   font-size: 16.3px;
-
+  /* 11px equivalent */
   font-weight: 700;
   margin-bottom: 14px;
 }
@@ -828,7 +876,7 @@ body.page-scene {
   border: none;
   padding: 0;
   font-size: 11.9px;
-
+  /* 8px equivalent */
   color: #3a4a44;
   margin-bottom: 10px;
 }
@@ -845,7 +893,7 @@ body.page-scene {
 .screen-ignyte-3 .subject .s-title,
 .screen-v2-ignyte-3 .subject .s-title {
   font-size: 11.9px;
-
+  /* 8px equivalent */
   color: #3a4a44;
   font-weight: 600;
   margin-bottom: 10px;
@@ -869,11 +917,17 @@ body.page-scene {
   animation: shimmer 1.6s linear infinite;
 }
 
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-v2-ignyte-1
+   Search Consultant v1 — full page
+═══════════════════════════════════════════ */
 .screen-v2-ignyte-1 {
   position: relative;
   padding: 10px 0px 0 21px;
   border-radius: 10px;
-
+  /* border: 1.5px solid var(--red); */
+  /* animation: grow 3.2s ease-in-out infinite; */
   width: 458px;
   height: 400px;
   background-image: url('images/bg-card.png');
@@ -898,7 +952,7 @@ body.page-scene {
 }
 
 .screen-v2-ignyte-1 .logo {
-  font-family: var(--font-open);
+  font-family: 'Brush Script MT', cursive;
   font-size: 38px;
   font-weight: 700;
   background: linear-gradient(90deg, #7fd3a8, var(--green-dark));
@@ -1106,7 +1160,7 @@ body.page-scene {
   z-index: 999999;
   width: 100%;
   position: relative;
-
+  /* max-height: 44px; */
 }
 
 .screen-v2-ignyte-1 .attach {
@@ -1180,6 +1234,11 @@ body.page-scene {
   height: 8px;
 }
 
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-v2-ignyte
+   Candidate Profiles
+═══════════════════════════════════════════ */
 .screen-v2-ignyte {
   position: relative;
   width: 458px;
@@ -1188,7 +1247,7 @@ body.page-scene {
   background-image: url('images/bg-card.png');
   background-size: cover;
   overflow: hidden;
-  font-family: var(--font-open);
+  font-family: var(--font-main);
   color: #fff;
 }
 
@@ -1468,6 +1527,11 @@ body.page-scene {
   height: 16px;
 }
 
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-researcher  (v1 — canvas scale)
+   The Researcher (old fixed-scale version)
+═══════════════════════════════════════════ */
 .screen-researcher {
   position: relative;
   width: 458px;
@@ -1692,6 +1756,7 @@ body.page-scene {
   background: var(--pink);
 }
 
+
 .screen-researcher .scores {
   position: absolute;
   top: 18px;
@@ -1876,6 +1941,11 @@ body.page-scene {
   height: 8px;
 }
 
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-v2-researcher
+   The Researcher v2 — CSS grid layout
+═══════════════════════════════════════════ */
 .screen-v2-researcher {
   position: relative;
   width: min(1180px, 100%);
@@ -2271,6 +2341,14 @@ body.page-scene {
   height: 8px;
 }
 
+
+
+
+/* ═══════════════════════════════════════════
+   SCREEN: screen-v2-ignyte-6
+   Assistant — Final Report View
+═══════════════════════════════════════════ */
+
 .screen-v2-ignyte-6 {
   position: relative;
   width: 458px;
@@ -2279,7 +2357,7 @@ body.page-scene {
   background-image: url('images/bg-card.png');
   background-size: cover;
   overflow: hidden;
-  font-family: var(--font-open);
+  font-family: var(--font-main);
   color: var(--ink);
 }
 
@@ -2296,6 +2374,7 @@ body.page-scene {
   flex-direction: column;
 }
 
+/* ── ASSISTANT Tag ── */
 .screen-v2-ignyte-6 .tag-asst {
   display: inline-flex;
   align-items: center;
@@ -2323,6 +2402,7 @@ body.page-scene {
   flex: none;
 }
 
+/* ── Main 2-col grid ── */
 .screen-v2-ignyte-6 .main-grid {
   flex: 1;
   min-height: 0;
@@ -2346,6 +2426,7 @@ body.page-scene {
   height: 100%;
 }
 
+/* ── Shared card ── */
 .screen-v2-ignyte-6 .card {
   background: linear-gradient(175deg, #ffffff 0%, #e6f2ec 100%);
   border: 1px solid rgba(176, 214, 192, .52);
@@ -2355,6 +2436,7 @@ body.page-scene {
     inset 0 -1px 0 rgba(0, 0, 0, .03);
 }
 
+/* ── Skeleton ── */
 .screen-v2-ignyte-6 .sk {
   border-radius: 6px;
   background: linear-gradient(90deg, #dce3df 0%, #edf1ed 50%, #dce3df 100%);
@@ -2362,6 +2444,11 @@ body.page-scene {
   animation: shimmer 2s linear infinite;
 }
 
+/* ══════════════════════
+   LEFT COLUMN
+══════════════════════ */
+
+/* Card 1 — Intro */
 .screen-v2-ignyte-6 .card-intro {
   flex: none;
   padding: 22px 30px 24px;
@@ -2380,6 +2467,7 @@ body.page-scene {
   width: 82%;
 }
 
+/* Card 2 — Search Requirements + Strategy */
 .screen-v2-ignyte-6 .card-search {
   flex: 1;
   min-height: 0;
@@ -2478,6 +2566,7 @@ body.page-scene {
   border-radius: 7px;
 }
 
+/* teal then dark segment */
 .screen-v2-ignyte-6 .bf.s {
   background: linear-gradient(90deg, #17a98b 0%, #17a98b 52%, #2a3830 52%, #2a3830 76%);
   width: 76%;
@@ -2493,6 +2582,7 @@ body.page-scene {
   width: 46%;
 }
 
+/* Card 3 — Structured formatted report */
 .screen-v2-ignyte-6 .card-report {
   flex: none;
   padding: 24px 28px 26px;
@@ -2510,6 +2600,11 @@ body.page-scene {
   line-height: 0;
 }
 
+/* ══════════════════════
+   RIGHT COLUMN
+══════════════════════ */
+
+/* FINAL REPORT label */
 .screen-v2-ignyte-6 .final-lbl {
   font-size: 13px;
   font-weight: 700;
@@ -2519,6 +2614,7 @@ body.page-scene {
   flex: none;
 }
 
+/* Stats card */
 .screen-v2-ignyte-6 .card-stats {
   flex: none;
   padding: 20px 22px 22px;
@@ -2538,6 +2634,8 @@ body.page-scene {
 .screen-v2-ignyte-6 .st:first-child {
   padding-left: 2px;
 }
+
+
 
 .screen-v2-ignyte-6 .st-k {
   font-size: 11px;
@@ -2582,6 +2680,7 @@ body.page-scene {
   font-weight: 600;
 }
 
+/* Candidates card */
 .screen-v2-ignyte-6 .card-cands {
   min-height: 0;
   display: flex;
@@ -2641,6 +2740,8 @@ body.page-scene {
   width: 65%;
 }
 
+
+/* Candidate card: renders 245 × 317px */
 .screen-ignyte-3 .candidate,
 .screen-v2-ignyte-3 .candidate {
   width: 458px;
@@ -2650,6 +2751,7 @@ body.page-scene {
   position: relative;
 }
 
+/* Shortlist: renders 122 × 128px */
 .screen-ignyte-3 .shortlist,
 .screen-v2-ignyte-3 .shortlist {
   position: absolute;
@@ -2660,6 +2762,7 @@ body.page-scene {
   padding: 22px 22px 26px;
 }
 
+/* Recruiter card: renders 222 × 117px */
 .screen-ignyte-3 .recruiter-card,
 .screen-v2-ignyte-3 .recruiter-card {
   margin-top: -129px;
@@ -2672,6 +2775,7 @@ body.page-scene {
   left: 100px;
 }
 
+/* Message: renders 169 × 141px */
 .screen-ignyte-3 .message,
 .screen-v2-ignyte-3 .message {
   position: absolute;
@@ -2682,6 +2786,8 @@ body.page-scene {
   padding: 22px 24px 26px;
 }
 
+
+/* Researcher: renders 277 × 332px */
 .screen-researcher .researcher {
   position: absolute;
   top: 125px;
@@ -2692,6 +2798,7 @@ body.page-scene {
   z-index: 2;
 }
 
+/* Scores: renders 168 × 165px */
 .screen-researcher .scores {
   position: absolute;
   top: 48px;
@@ -2702,6 +2809,7 @@ body.page-scene {
   z-index: 5;
 }
 
+/* Operator: renders 184 × 45px */
 .screen-researcher .operator {
   position: absolute;
   top: 584px;
@@ -2715,6 +2823,7 @@ body.page-scene {
   z-index: 4;
 }
 
+/* Reasoning: renders 184 × 65px */
 .screen-researcher .reasoning {
   position: absolute;
   top: 760px;
