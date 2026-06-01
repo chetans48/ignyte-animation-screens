@@ -1457,10 +1457,10 @@ body.page-scene {
 .screen-v2-ignyte .node.last {
   width: 34px;
   height: 34px;
-  background: radial-gradient(circle at 30% 30%, #d8f386, #c9f06a);
+  background: radial-gradient(circle at 30% 30%, #74f58b 0%, #2bb568 50%, #0b7b4f 100%);
   display: grid;
   place-items: center;
-  box-shadow: 0 0 0 4px #fff, 0 6px 14px rgba(0, 0, 0, .25);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .25);
 }
 
 .screen-v2-ignyte .node.last svg {
@@ -1829,7 +1829,7 @@ body.page-scene {
 .screen-researcher .operator p {
   margin: 0;
   color: #4a5a50;
-  font-size: 17px;
+  font-size: 22px;
   line-height: 1.4;
   font-weight: 500;
 }
@@ -1851,9 +1851,39 @@ body.page-scene {
   color: #253028;
 }
 
+.screen-researcher .reasoning .bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.screen-researcher .reasoning .dot {
+  margin-top: 4px;
+}
+
+.screen-researcher .reasoning .sk-stack {
+  flex: 1;
+  min-width: 0;
+}
+
+.screen-researcher .reasoning .sk-stack .sk {
+  flex: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #dfe5e3 0%, #eef2f0 50%, #dfe5e3 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.screen-researcher .reasoning .sk-stack .sk:nth-child(2) {
+  width: 70%;
+}
+
 .screen-researcher .bullet {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 10px;
 }
@@ -2446,6 +2476,7 @@ body.page-scene {
   display: flex;
   flex-direction: column;
   gap: 13px;
+  width: 70%;
 }
 
 .screen-v2-ignyte-6 .bar-row {
