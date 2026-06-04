@@ -174,15 +174,10 @@ Draft an outreach email</button>
       
       setInterval(cycleOptions, 3000);
 
-      var loopDuration = 120000;
       var loopVisibleTime = 6450;
-      var stageStart = Date.now();
       var loopTimer;
 
       function replayCards() {
-        var elapsed = Date.now() - stageStart;
-        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
-
         stage.classList.remove('animate-loop');
         void stage.offsetWidth;
         stage.classList.add('animate-loop');
@@ -191,10 +186,6 @@ Draft an outreach email</button>
       }
 
       replayCards();
-      setTimeout(function() {
-        clearTimeout(loopTimer);
-        stage.classList.add('animate-loop');
-      }, loopDuration);
     })();
   </script>
 </body>

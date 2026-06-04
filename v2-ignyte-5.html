@@ -379,15 +379,10 @@
       resize();
       window.addEventListener('resize', resize);
 
-      var loopDuration = 120000;
       var loopVisibleTime = 8700;
-      var sceneStart = Date.now();
       var loopTimer;
 
       function replaySequence() {
-        var elapsed = Date.now() - sceneStart;
-        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
-
         scene.classList.remove('animate-loop');
         void scene.offsetWidth;
         scene.classList.add('animate-loop');
@@ -396,10 +391,6 @@
       }
 
       replaySequence();
-      setTimeout(function () {
-        clearTimeout(loopTimer);
-        scene.classList.add('animate-loop');
-      }, loopDuration);
     })();
   </script>
 </body>

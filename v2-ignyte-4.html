@@ -454,9 +454,7 @@
 
       // Loop-based smooth counter animation for numbers
       var counters = document.querySelectorAll('.score, .num');
-      var loopDuration = 120000;
       var loopVisibleTime = 6900;
-      var stageStart = Date.now();
       var loopTimer;
       var counterTimers = [];
       var counterData = [];
@@ -572,9 +570,6 @@
       }
 
       function replayCards() {
-        var elapsed = Date.now() - stageStart;
-        if (elapsed >= loopDuration || elapsed + loopVisibleTime > loopDuration) return;
-
         resetCounters();
         resetProfileTimers();
         setActiveProfile(0);
@@ -589,14 +584,6 @@
 
       setActiveProfile(0);
       replayCards();
-      setTimeout(function() {
-        clearTimeout(loopTimer);
-        counterTimers.forEach(function(timer) {
-          clearTimeout(timer);
-        });
-        resetProfileTimers();
-        stage.classList.add('animate-loop');
-      }, loopDuration);
     })();
   </script>
 </body>
